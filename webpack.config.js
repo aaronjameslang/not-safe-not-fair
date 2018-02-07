@@ -1,10 +1,14 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './js/index.js',
+  entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'docs'),
-    filename: 'index.js'
+    filename: 'bundle.js'
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
   },
   module: {
     rules: [
@@ -17,7 +21,20 @@ module.exports = {
             presets: ['babel-preset-env'],
           }
         }
-      }
-    ]
-  }
+      },
+      {
+        test: /\.s?css$/,
+        use: [
+          {loader: "style-loader"},
+          {loader:   "css-loader"},
+          {loader:  "sass-loader"},
+        ]
+    }]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Not Safe Not Fair',
+      filename: 'index.html'
+    })
+  ],
 }

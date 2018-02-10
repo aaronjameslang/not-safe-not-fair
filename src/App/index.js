@@ -1,11 +1,18 @@
 import React from 'react'
-import ReactDOM from "react-dom"
+
+import './style'
 
 import Header from './Header'
+import Body from './Body'
 
 class App extends React.Component {
   render() {
-    return <Header/>
+    return (
+      <React.Fragment>
+        <Header/>
+        <Body/>
+      </React.Fragment>
+    )
   }
 }
 

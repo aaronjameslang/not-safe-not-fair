@@ -15,19 +15,22 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['babel-preset-env'],
+        use: [
+          "cache-loader",
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['babel-preset-env'],
+            }
           }
-        }
+        ]
       },
       {
         test: /\.s?css$/,
         use: [
-          {loader: "style-loader"},
-          {loader:   "css-loader"},
-          {loader:  "sass-loader"},
+          "style-loader",
+            "css-loader",
+           "sass-loader",
         ]
     }]
   },

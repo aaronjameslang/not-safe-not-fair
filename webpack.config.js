@@ -37,4 +37,7 @@ module.exports = {
       filename: 'index.html'
     })
   ],
+  devServer: {
+    host: "0.0.0.0"
+  }
 }

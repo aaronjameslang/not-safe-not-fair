@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -38,6 +40,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Not Safe Not Fair',
       filename: 'index.html'
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      generateStatsFile: true,
+      openAnalyzer: false,
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
     })
   ],
   devServer: {

@@ -1,4 +1,5 @@
 const path = require('path');
+const { spawnSync } = require('child_process');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -50,7 +51,14 @@ module.exports = {
       openAnalyzer: false,
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': '"production"',
+      notsafenotfair: {
+        build: {
+          commithash: '"' + spawnSync('git', ['rev-parse', 'HEAD']).stdout.toString().slice(0, -1) + '"',
+          dirty: spawnSync('git', ['diff', '--exit-code']).status,
+          time: Date.now(),
+        }
+      }
     }),
     new UglifyJsPlugin(),
     new ExtractTextPlugin("styles.css")

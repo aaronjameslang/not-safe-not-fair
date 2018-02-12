@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
@@ -40,8 +41,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Not Safe Not Fair',
-      filename: 'index.html'
+      filename: 'index.html',
+      inlineSource: '.'
     }),
+    new HtmlWebpackInlineSourcePlugin(),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       generateStatsFile: true,

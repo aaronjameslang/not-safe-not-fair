@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -31,11 +32,9 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: [
-          "style-loader",
-            "css-loader",
-           "sass-loader",
-        ]
+        use: ExtractTextPlugin.extract({
+          use: ["css-loader", "sass-loader"]
+        })
     }]
   },
   plugins: [
@@ -53,7 +52,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),
-    new UglifyJsPlugin()
+    new UglifyJsPlugin(),
+    new ExtractTextPlugin("styles.css")
   ],
   devServer: {
     host: "0.0.0.0"

@@ -2,6 +2,9 @@ import React from 'react'
 import Button from 'muicss/lib/react/button';
 import Option from 'muicss/lib/react/option';
 import Select from 'muicss/lib/react/select';
+import Textarea from 'muicss/lib/react/textarea';
+
+import './style'
 
 class Header extends React.Component {
   render () {
@@ -17,7 +20,7 @@ class Header extends React.Component {
           <Option label="St. Thomas' Hospital" />
           <Option label="Waterloo Infiramry" />
         </Select>
-        <textarea></textarea>
+        <Textarea placeholder="Details" />
         <Button variant="raised" color="primary">Cancel</Button>
         <Button variant="raised" color="primary">Report</Button>
       </div>

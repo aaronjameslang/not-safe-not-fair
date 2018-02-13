@@ -1,28 +1,28 @@
 import React from 'react'
+import Button from 'muicss/lib/react/button';
+import Option from 'muicss/lib/react/option';
+import Select from 'muicss/lib/react/select';
+import Textarea from 'muicss/lib/react/textarea';
+
+import './style'
 
 class Header extends React.Component {
   render () {
     return (
       <div id="body">
       <div>Welcome, jane.smith</div>
-        <label>
-          I wish to report:
-          <select>
-            <option>short staffing</option>
-            <option>missed teaching</option>
-          </select>
-        </label>
-        <label>
-          Location:
-          <select>
-            <option>Current Location (12'34", 89'67")</option>
-            <option>St. Thomas' Hopsital</option>
-            <option>Waterloo Infirmary</option>
-          </select>
-        </label>
-        <textarea></textarea>
-        <button>Cancel</button>
-        <button>Report</button>
+        <Select label="I wish to report:">
+          <Option label="short staffing" />
+          <Option label="missed teaching" />
+        </Select>
+        <Select label="Location:">
+          <Option label="Current Location (12'34'' 89'67'')" />
+          <Option label="St. Thomas' Hospital" />
+          <Option label="Waterloo Infiramry" />
+        </Select>
+        <Textarea placeholder="Details" />
+        <Button variant="raised" color="primary">Cancel</Button>
+        <Button variant="raised" color="primary">Report</Button>
       </div>
     )
   }

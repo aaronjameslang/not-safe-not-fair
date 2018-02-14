@@ -64,6 +64,7 @@ module.exports = {
     new ExtractTextPlugin("styles.css")
   ],
   devServer: {
+    contentBase: path.join(__dirname, "deploy"),
     host: "0.0.0.0"
   }
 }

@@ -8,9 +8,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: './src/client/index.jsx',
   output: {
-    path: path.resolve(__dirname, 'deploy'),
+    path: path.resolve(__dirname, 'static'),
     filename: 'bundle.js'
   },
   resolve: {

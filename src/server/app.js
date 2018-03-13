@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 app.use(express.static('static'))
-app.use(express.json());
+app.use(express.json())
 
 app.get('/report', (req, res) => {
   const reports = [{
@@ -22,4 +22,4 @@ app.post('/report', (req, res) => {
   res.end()
 })
 
-app.listen(8080, () => console.log('Listening on 8080'))
+module.exports = app

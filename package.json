@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "start": "webpack-dev-server",
-    "webpack": "webpack"
+    "prestart": "webpack"
   },
   "author": "aaronjameslang@googlemail.com",
   "license": "MIT",

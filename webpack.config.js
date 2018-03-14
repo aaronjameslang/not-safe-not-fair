@@ -7,11 +7,9 @@ const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const isDev = process.env.NODE_ENV === 'development'
-
 const commonPlugins = [
   new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
       notsafenotfair: {
         build: {
           commithash: '"' + spawnSync('git', ['rev-parse', 'HEAD']).stdout.toString().slice(0, -1) + '"',
@@ -19,19 +17,17 @@ const commonPlugins = [
           time: Date.now(),
         }
       }
-    })
+    }),
+    new UglifyJsPlugin(),
 ]
 
-if (isDev) {
+if (process.env.ANALYSE) {
   commonPlugins.push(
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       generateStatsFile: true,
       openAnalyzer: false,
     })
-  )
-  commonPlugins.push(
-    new UglifyJsPlugin(),
   )
 }
 

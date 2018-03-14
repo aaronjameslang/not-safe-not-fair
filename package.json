@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "prestart": "webpack"
+    "analyse": "ANALYSE=1 webpack",
+    "webpack": "webpack"
   },
   "author": "aaronjameslang@googlemail.com",
   "license": "MIT",

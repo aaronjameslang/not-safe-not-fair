@@ -9,7 +9,7 @@ deploy:
   function_name: not-safe-not-fair
   zip: deploy
   handler_name: handler
-  role: "arn:aws:iam::0123456789012:role/lambda_basic_execution"
+  role: arn:aws:iam::268897920616:role/lambda_basic_execution
   on:
     branch: lambda
   access_key_id: AKIAI2EARVBQAKFPV7KQ

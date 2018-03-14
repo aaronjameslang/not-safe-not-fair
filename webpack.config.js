@@ -7,10 +7,38 @@ const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-module.exports = {
+const isDev = process.env.NODE_ENV === 'development'
+
+const commonPlugins = [
+  new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"',
+      notsafenotfair: {
+        build: {
+          commithash: '"' + spawnSync('git', ['rev-parse', 'HEAD']).stdout.toString().slice(0, -1) + '"',
+          dirty: spawnSync('git', ['diff', '--exit-code']).status,
+          time: Date.now(),
+        }
+      }
+    })
+]
+
+if (isDev) {
+  commonPlugins.push(
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      generateStatsFile: true,
+      openAnalyzer: false,
+    })
+  )
+  commonPlugins.push(
+    new UglifyJsPlugin(),
+  )
+}
+
+const clientConfig = {
   entry: './src/client/index.jsx',
   output: {
-    path: path.resolve(__dirname, 'static'),
+    path: path.resolve(__dirname, 'deploy', 'static'),
     filename: 'bundle.js'
   },
   resolve: {
@@ -45,26 +73,39 @@ module.exports = {
       inlineSource: '.'
     }),
     new HtmlWebpackInlineSourcePlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      generateStatsFile: true,
-      openAnalyzer: false,
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
-      notsafenotfair: {
-        build: {
-          commithash: '"' + spawnSync('git', ['rev-parse', 'HEAD']).stdout.toString().slice(0, -1) + '"',
-          dirty: spawnSync('git', ['diff', '--exit-code']).status,
-          time: Date.now(),
-        }
-      }
-    }),
-    new UglifyJsPlugin(),
     new ExtractTextPlugin("styles.css")
-  ],
+  ].concat(commonPlugins),
   devServer: {
     contentBase: path.join(__dirname, "deploy"),
     host: "0.0.0.0"
   }
 }
+
+const serverConfig = {
+  entry: './src/server/index.js',
+  output: {
+    path: path.resolve(__dirname, 'deploy'),
+    filename: 'index.js'
+  },
+  target: 'node',
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: [
+          "cache-loader",
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['babel-preset-env'],
+            }
+          }
+        ]
+      }
+    ]
+  },
+  plugins: commonPlugins
+}
+
+module.exports = [clientConfig, serverConfig]

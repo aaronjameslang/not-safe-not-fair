@@ -81,7 +81,8 @@ const serverConfig = {
   entry: './src/server/index.js',
   output: {
     path: path.resolve(__dirname, 'deploy'),
-    filename: 'index.js'
+    filename: 'index.js',
+    libraryTarget: 'commonjs2'
   },
   target: 'node',
   module: {

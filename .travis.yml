@@ -4,13 +4,15 @@ script:
   - webpack
   - git diff --exit-code
 deploy:
-  provider: s3
+  provider: lambda
   region: eu-west-2
-  bucket: notsafenotfair.org
-  skip_cleanup: true
-  local_dir: deploy
+  function_name: not-safe-not-fair
+  zip: deploy
+  handler_name: handler
+  runtime: nodejs6.10
+  role: arn:aws:iam::268897920616:role/lambda_basic_execution
   on:
-    branch: master
+    branch: lambda
   access_key_id: AKIAI2EARVBQAKFPV7KQ
   secret_access_key:
     secure: G+Z0EB1sNFGiVHco1R/FIfV1jpF8iqEi3G1YUZBtwxPlDKFexHtC5ievr/8n8kIvr+aPFm0+Z8Qu5G2pZUYPGopCTX7P2slPAglLeRJSUJg2DWCRoY12WOSLeBX9QRSdxHV6hvTxDtiDdpIXk5h5VRHWXH+kVmfZpxAn0brL4k0DQqA1ugIpLW2Bio6mmKUczuOSQjFUzdZ/uH67D564Ilq0mAQIp5TnSYcTqkw5pgMRsdF9TAFId7yu/KCwZdhgkpXW+AgAf/J9i03XTvAyOc9JA+LN0tXGB0q2LEaYCryvDmIWbU9VDF7bkNuEG5wQpa/JlNDU5YN75h9qm24T2D5gbd8p8XCasqPLEbjuCEfKhLUMoFEC44rHKfVv1p8HAm7OERvkBiIQ73RHYvGeKw84SR4c5Fc/XcuyJgVf7YyKXFfxmoy20t5VR28JOT5CASv8RIfep0K3d2jgUOjWwIFPrpwwVtIKztu+2HwvOzdZxsjD4+s0/GRmGk+I3vVJWhIMcsoyzzLVIIiyvuRf2WZAynyVD9RMIY2hJ9YjEzsi1XhLwzDKl30EkKtfkcSaObkHE21NPoBmcWKGiieV188PUpeJt7elftd3rvNvkXfBVSgwGY8EqT/P+Q/bBTxqVXoEPzKVhMUlbZhyHQpK78/DT+qmR7mjzxBQKJNv/XI=

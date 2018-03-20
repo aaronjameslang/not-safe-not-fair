@@ -3,12 +3,16 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "start": "webpack-dev-server",
+    "analyse": "ANALYSE=1 webpack",
     "webpack": "webpack"
   },
   "author": "aaronjameslang@googlemail.com",
   "license": "MIT",
   "dependencies": {
+    "aws-serverless-express": "^3.1.3",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-react-jsx": "^6.24.1",

@@ -1,0 +1,9 @@
+{
+  "sql-file" : true,
+  "development": {
+    "driver": "pg",
+    "user": "notsafenotfair",
+    "password": "mu9Aiyee",
+    "database": "notsafenotfair"
+  }
+}

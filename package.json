@@ -4,6 +4,14 @@
   "description": "",
   "scripts": {
     "analyse": "ANALYSE=1 webpack",
+    "dbclean": "npm run dbdrop && npm run dbcreate && npm run dbmu",
+    "dbcreate": "npm run psql -- --dbname postgres -c 'CREATE DATABASE notsafenotfair'",
+    "dbdrop":   "npm run psql -- --dbname postgres -c 'DROP   DATABASE notsafenotfair'",
+    "dbmc": "db-migrate create",
+    "dbmu": "db-migrate up",
+    "psql": "PGPASSWORD=mu9Aiyee psql --host localhost --user notsafenotfair",
+    "start": "docker-compose up -d",
+    "stop":  "docker-compose down",
     "webpack": "webpack"
   },
   "author": "aaronjameslang@googlemail.com",
@@ -11,6 +19,7 @@
   "dependencies": {
     "aws-serverless-express": "^3.1.3",
     "db-migrate": "^0.10.6",
+    "db-migrate-pg": "^0.3.1",
     "express": "^4.16.3"
   },
   "devDependencies": {

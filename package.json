@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "analyse": "ANALYSE=1 webpack",
+    "start:api": "sam local start-api",
     "webpack": "webpack"
   },
   "author": "aaronjameslang@googlemail.com",

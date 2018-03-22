@@ -1,0 +1,18 @@
+Resources:
+  nsnf:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./deploy
+      Handler: index.handler
+      Runtime: nodejs6.10
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+        Home:
+          Type: Api
+          Properties:
+            Path: /
+            Method: any

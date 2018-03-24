@@ -4,6 +4,7 @@
     "driver": "pg",
     "user": "notsafenotfair",
     "password": "mu9Aiyee",
-    "database": "notsafenotfair"
+    "database": "notsafenotfair",
+    "host": "localhost"
   }
 }

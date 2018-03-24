@@ -22,4 +22,18 @@ app.post('/report', (req, res) => {
   res.end()
 })
 
+app.get('/report/reason', (req, res) => { // : void
+  const { Client } = require('pg')
+  const client = new Client()
+  console.log('connecting to db')
+  client.connect().then(() => {
+  console.log('querying')
+    return client.query('SELECT * FROM report_reason')
+  }).then(result => {
+    console.log(result.rows)
+    client.end()
+    res.end()
+  })
+})
+
 module.exports = app

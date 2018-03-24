@@ -1,10 +1,15 @@
 Resources:
-  nsnf:
+  notsafenotfair:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./deploy
       Handler: index.handler
       Runtime: nodejs6.10
+      Environment:
+        Variables:
+          PGHOST: 'see ./.env*'
+          PGPASSWORD: 'see ./.env*'
+          PGUSER: 'see ./.env*'
       Events:
         Api:
           Type: Api

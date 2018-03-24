@@ -11,7 +11,7 @@
     "dbmu": "db-migrate up",
     "psql": "docker run -it --rm --network=notsafenotfair_default --env-file .env postgres:9.6-alpine psql",
     "start": "webpack && npm run start:db && npm run start:api",
-    "start:api": "sam local start-api --docker-network=notsafenotfair_default",
+    "start:api": "node .env.js && sam local start-api --docker-network=notsafenotfair_default --env-vars .env.json",
     "start:db": "docker-compose up -d",
     "stop": "npm run stop:db",
     "stop:db": "docker-compose down",

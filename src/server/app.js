@@ -25,14 +25,14 @@ app.post('/report', (req, res) => {
 app.get('/report/reason', (req, res) => { // : void
   const { Client } = require('pg')
   const client = new Client()
+  // use pool
   console.log('connecting to db')
   client.connect().then(() => {
   console.log('querying')
     return client.query('SELECT * FROM report_reason')
   }).then(result => {
-    console.log(result.rows)
     client.end()
-    res.end()
+    res.json(result.rows)
   })
 })
 

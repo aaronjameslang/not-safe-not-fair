@@ -2,8 +2,6 @@ version: '3'
 services:
   db:
     image: postgres:9.6-alpine
-    ports:
-      - '5432:5432'
     environment:
       POSTGRES_PASSWORD: mu9Aiyee
       POSTGRES_USER: notsafenotfair

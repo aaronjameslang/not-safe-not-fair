@@ -9,7 +9,7 @@
     "dbdrop": "npm run psql -- --dbname postgres -c 'DROP   DATABASE notsafenotfair'",
     "dbmc": "db-migrate create",
     "dbmu": "db-migrate up",
-    "psql": "PGPASSWORD=mu9Aiyee psql --host localhost --user notsafenotfair",
+    "psql": "docker run -it --rm --network=notsafenotfair_default --env-file .env postgres psql",
     "start": "webpack && npm run start:db && npm run start:api",
     "start:api": "sam local start-api --docker-network=notsafenotfair_default",
     "start:db": "docker-compose up -d",

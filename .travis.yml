@@ -5,6 +5,7 @@ script:
   - git diff --exit-code
 deploy:
   - provider: script
+    skip_cleanup: true
     script: rm .env && ./node_modules/.bin/db-migrate up
     on:
       branch: db

@@ -5,7 +5,7 @@ script:
   - git diff --exit-code
 deploy:
   - provider: script
-    script: rm .env && npm run db-migrate up
+    script: rm .env && ./node_modules/.bin/db-migrate up
     on:
       branch: db
   - provider: lambda

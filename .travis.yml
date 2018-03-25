@@ -1,23 +1,26 @@
 language: node_js
 node_js: node
 script:
-  - webpack
-  - git diff --exit-code
+- webpack
+- git diff --exit-code
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: rm .env && ./node_modules/.bin/db-migrate up
-    on:
-      branch: db
-  - provider: lambda
-    region: eu-west-2
-    function_name: not-safe-not-fair
-    zip: deploy
-    handler_name: handler
-    runtime: nodejs6.10
-    role: arn:aws:iam::268897920616:role/lambda_basic_execution
-    on:
-      branch: master
-    access_key_id: AKIAI2EARVBQAKFPV7KQ
-    secret_access_key:
-      secure: G+Z0EB1sNFGiVHco1R/FIfV1jpF8iqEi3G1YUZBtwxPlDKFexHtC5ievr/8n8kIvr+aPFm0+Z8Qu5G2pZUYPGopCTX7P2slPAglLeRJSUJg2DWCRoY12WOSLeBX9QRSdxHV6hvTxDtiDdpIXk5h5VRHWXH+kVmfZpxAn0brL4k0DQqA1ugIpLW2Bio6mmKUczuOSQjFUzdZ/uH67D564Ilq0mAQIp5TnSYcTqkw5pgMRsdF9TAFId7yu/KCwZdhgkpXW+AgAf/J9i03XTvAyOc9JA+LN0tXGB0q2LEaYCryvDmIWbU9VDF7bkNuEG5wQpa/JlNDU5YN75h9qm24T2D5gbd8p8XCasqPLEbjuCEfKhLUMoFEC44rHKfVv1p8HAm7OERvkBiIQ73RHYvGeKw84SR4c5Fc/XcuyJgVf7YyKXFfxmoy20t5VR28JOT5CASv8RIfep0K3d2jgUOjWwIFPrpwwVtIKztu+2HwvOzdZxsjD4+s0/GRmGk+I3vVJWhIMcsoyzzLVIIiyvuRf2WZAynyVD9RMIY2hJ9YjEzsi1XhLwzDKl30EkKtfkcSaObkHE21NPoBmcWKGiieV188PUpeJt7elftd3rvNvkXfBVSgwGY8EqT/P+Q/bBTxqVXoEPzKVhMUlbZhyHQpK78/DT+qmR7mjzxBQKJNv/XI=
+- provider: script
+  skip_cleanup: true
+  script: rm .env && ./node_modules/.bin/db-migrate up
+  on:
+    branch: db
+- provider: lambda
+  region: eu-west-2
+  function_name: not-safe-not-fair
+  zip: deploy
+  handler_name: handler
+  runtime: nodejs6.10
+  role: arn:aws:iam::268897920616:role/lambda_basic_execution
+  on:
+    branch: master
+  access_key_id: AKIAI2EARVBQAKFPV7KQ
+  secret_access_key:
+    secure: G+Z0EB1sNFGiVHco1R/FIfV1jpF8iqEi3G1YUZBtwxPlDKFexHtC5ievr/8n8kIvr+aPFm0+Z8Qu5G2pZUYPGopCTX7P2slPAglLeRJSUJg2DWCRoY12WOSLeBX9QRSdxHV6hvTxDtiDdpIXk5h5VRHWXH+kVmfZpxAn0brL4k0DQqA1ugIpLW2Bio6mmKUczuOSQjFUzdZ/uH67D564Ilq0mAQIp5TnSYcTqkw5pgMRsdF9TAFId7yu/KCwZdhgkpXW+AgAf/J9i03XTvAyOc9JA+LN0tXGB0q2LEaYCryvDmIWbU9VDF7bkNuEG5wQpa/JlNDU5YN75h9qm24T2D5gbd8p8XCasqPLEbjuCEfKhLUMoFEC44rHKfVv1p8HAm7OERvkBiIQ73RHYvGeKw84SR4c5Fc/XcuyJgVf7YyKXFfxmoy20t5VR28JOT5CASv8RIfep0K3d2jgUOjWwIFPrpwwVtIKztu+2HwvOzdZxsjD4+s0/GRmGk+I3vVJWhIMcsoyzzLVIIiyvuRf2WZAynyVD9RMIY2hJ9YjEzsi1XhLwzDKl30EkKtfkcSaObkHE21NPoBmcWKGiieV188PUpeJt7elftd3rvNvkXfBVSgwGY8EqT/P+Q/bBTxqVXoEPzKVhMUlbZhyHQpK78/DT+qmR7mjzxBQKJNv/XI=
+env:
+  matrix:
+    secure: KTCVZp41yrNy4ZIKHt0x5583QVAYnv16SD3+AHC+rl98CzbqIFLiwHco1pwYFPItJMnU+tXGotQ75S/bbsn660fx1uh2ak9QBIrBWydOFXxhFk2zMOT8CEoq8487CAGMypbrKmYryNZEF/g9WuF+1SMK9h3kRdQCrjnG3C6EkVjgajEUrgk0fTtIdX5d83IMoSkHW5d36jsMH/qbRN/4zysJXWrGyTIHBSBpnFekTjyZj2kCCtvua7vNL2GKqnKBBgwDpXDJqBiyTWybavLiWMyuszdVaj3l/OEIfjJQfs2CXdJXNXss/LenhzFUKLwnc6Lq5QzI8Y6o9/XnAB1q/YnB6zxrrQE1AWKfMOOz2wO3PAgqyrCMIo1QPWPjtKyx3BZv9onXOL5ZjlkQjo4SpBYUaJ0DQgnidcEHSSMLOPgGG+LKZeMJxHHOIIhzVzWZeyQDgSBUZV6VyrBrpIPu43n8v4VK64QiXt7MYodLpfX7ByzovBgFn/vdA8Pzxr51x9N10kxeOEmpeCp2djYwIL2SBNPAUOAYE8NG9McA/csGa9D8owATDwmcrU1FUkJE8Ifh9QGGL+XFXPbHTBEst9sP/LfwAU0EODW4zsBHxGTxVF0ZvYXSFGs/uVhwwFhnqfPB2/dDz3KVSiJjzJ2K3uIUVnXOBC/XBtjFq5Dv4Gw=

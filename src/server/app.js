@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 
+const { Pool } = require('pg')
+const pool = new Pool()
+
 app.use(express.static('static'))
 app.use(express.json())
 
@@ -23,15 +26,8 @@ app.post('/report', (req, res) => {
 })
 
 app.get('/report/reason', (req, res) => { // : void
-  const { Client } = require('pg')
-  const client = new Client()
-  // use pool
-  console.log('connecting to db')
-  client.connect().then(() => {
-  console.log('querying')
-    return client.query('SELECT * FROM report_reason')
-  }).then(result => {
-    client.end()
+  pool.query('SELECT * FROM report_reason')
+  .then(result => {
     res.json(result.rows)
   })
 })

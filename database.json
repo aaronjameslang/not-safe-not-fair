@@ -1,0 +1,10 @@
+{
+  "sql-file" : true,
+  "development": {
+    "driver": "pg",
+    "database": {"ENV": "PGDATABASE"},
+    "host": {"ENV": "PGHOST"},
+    "password": {"ENV": "PGPASSWORD"},
+    "user": {"ENV": "PGUSER"}
+  }
+}

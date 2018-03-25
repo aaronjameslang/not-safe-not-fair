@@ -102,7 +102,9 @@ const serverConfig = {
       }
     ]
   },
-  plugins: commonPlugins
+  plugins: [
+    new webpack.IgnorePlugin(/\.\/native/, /\/pg\//),
+  ].concat(commonPlugins)
 }
 
 module.exports = [clientConfig, serverConfig]

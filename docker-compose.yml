@@ -3,5 +3,5 @@ services:
   db:
     image: postgres:9.6-alpine
     environment:
-      POSTGRES_PASSWORD: mu9Aiyee
-      POSTGRES_USER: notsafenotfair
+      POSTGRES_PASSWORD: "${PGPASSWORD}"
+      POSTGRES_USER: "${PGUSER}"

@@ -2,9 +2,9 @@
   "sql-file" : true,
   "development": {
     "driver": "pg",
-    "user": "notsafenotfair",
-    "password": "mu9Aiyee",
-    "database": "notsafenotfair",
-    "host": "localhost"
+    "database": {"ENV": "PGDATABASE"},
+    "host": {"ENV": "PGHOST"},
+    "password": {"ENV": "PGPASSWORD"},
+    "user": {"ENV": "PGUSER"}
   }
 }

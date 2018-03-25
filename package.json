@@ -4,11 +4,12 @@
   "description": "",
   "scripts": {
     "analyse": "ANALYSE=1 webpack",
+    "db-migrate": "db-migrate",
     "dbclean": "npm run dbdrop && npm run dbcreate && npm run dbmu",
     "dbcreate": "npm run psql -- --dbname postgres -c 'CREATE DATABASE notsafenotfair'",
     "dbdrop": "npm run psql -- --dbname postgres -c 'DROP   DATABASE notsafenotfair'",
     "dbmc": "db-migrate create",
-    "dbmu": "db-migrate up",
+    "dbmu": "docker run -it --rm --network=notsafenotfair_default --env-file .env --mount type=bind,src=$PWD,dst=/nsnf -w /nsnf node npm run db-migrate up",
     "psql": "docker run -it --rm --network=notsafenotfair_default --env-file .env postgres:9.6-alpine psql",
     "start": "webpack && npm run start:db && npm run start:api",
     "start:api": "node .env.js && sam local start-api --docker-network=notsafenotfair_default --env-vars .env.json",

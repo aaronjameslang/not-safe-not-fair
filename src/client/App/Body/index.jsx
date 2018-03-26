@@ -35,12 +35,28 @@ class Dashboard extends React.Component {
 }
 
 class ReportForm extends React.Component {
+  constructor () {
+    super()
+    this.loadReportReasons()
+    this.state = {
+      reasons: []
+    }
+  }
+
+  loadReportReasons () {
+    fetch('/report/reason').then(res => res.json()).then(
+      reasons => {
+        console.log(reasons)
+        this.setState({reasons})
+      }
+    )
+  }
+
   render () {
     return (
       <form>
         <Select label="I wish to report:">
-          <Option label="short staffing" />
-          <Option label="missed teaching" />
+          { this.state.reasons.map(reason => <Option value={reason.name} label={reason.label} />)}
         </Select>
         <Select label="Location:">
           <Option label="Current Location (12'34'' 89'67'')" />

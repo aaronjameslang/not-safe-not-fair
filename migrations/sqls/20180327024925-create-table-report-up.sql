@@ -1,14 +1,17 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE "user" (
-  id uuid  NOT NULL PRIMARY KEY,
+  id uuid NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
   email_address varchar(255)  NOT NULL
 );
 
+
 CREATE TABLE report (
-  id uuid NOT NULL PRIMARY KEY,
+  id uuid NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
   user_id uuid NOT NULL REFERENCES "user"(id),
-  location point NOT NULL,
-  comments text NOT NULL,
-  ctime timestamp NOT NULL
+  position point NOT NULL,
+  comment text NOT NULL,
+  ctime timestamp NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE report_x_reason (

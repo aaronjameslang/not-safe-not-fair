@@ -8,16 +8,10 @@ app.use(express.static('static'))
 app.use(express.json())
 
 app.get('/report', (req, res) => {
-  const reports = [{
-    location: 'Sheffield',
-    type: 'understaffed',
-    details: 'blah blah blah'
-  }, {
-    location: 'St Thomas\'',
-    type: 'missed teaching',
-    details: 'blah blah blah bleeeh'
-  }]
-  res.send(reports)
+  pool.query('SELECT * FROM report LIMIT 1000')
+  .then(result => {
+    res.json(result.rows)
+  })
 })
 
 app.post('/report', (req, res) => {

@@ -7,6 +7,10 @@ const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
+const {
+  DEBUG
+} = process.env
+
 const commonPlugins = [
   new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
@@ -17,9 +21,12 @@ const commonPlugins = [
           time: Date.now(),
         }
       }
-    }),
-    new UglifyJsPlugin(),
+    })
 ]
+
+if (!DEBUG) {
+  commonPlugins.push(new UglifyJsPlugin())
+}
 
 if (process.env.ANALYSE) {
   commonPlugins.push(
@@ -40,6 +47,7 @@ const clientConfig = {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.css', '.scss']
   },
+  devtool: DEBUG ? 'source-map' : undefined,
   module: {
     rules: [
       {
@@ -66,7 +74,7 @@ const clientConfig = {
     new HtmlWebpackPlugin({
       title: 'Not Safe Not Fair',
       filename: 'index.html',
-      inlineSource: '.'
+      inlineSource: DEBUG ? undefined : '.'
     }),
     new HtmlWebpackInlineSourcePlugin(),
     new ExtractTextPlugin("styles.css")

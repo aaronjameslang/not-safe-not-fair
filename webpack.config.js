@@ -55,12 +55,7 @@ const clientConfig = {
         exclude: /node_modules/,
         use: [
           "cache-loader",
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['babel-preset-env'],
-            }
-          }
+          'babel-loader',
         ]
       },
       {
@@ -100,12 +95,7 @@ const serverConfig = {
         exclude: /node_modules/,
         use: [
           "cache-loader",
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['babel-preset-env'],
-            }
-          }
+          'babel-loader',
         ]
       }
     ]

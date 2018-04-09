@@ -1,7 +1,9 @@
 import React from 'react'
 import * as api from '../../api'
+import styled from 'styled-components'
+import * as theme from '../../theme'
 
-export default class BodyReport extends React.Component {
+class BodyReport extends React.Component {
   componentWillMount () {
     this.state = {}
   }
@@ -10,9 +12,11 @@ export default class BodyReport extends React.Component {
     api.getReports(id).then(reports => this.setState({reports}))
   }
   render () { return (
-    <div>
-      <p>{this.state.reports?this.state.reports.length:'Loading'} results</p>
+    <div className={this.props.className}>
       <ReportList reports={this.state.reports||[]} />
+      <div class="count">
+        {this.state.reports?this.state.reports.length:'Loading'} results
+      </div>
     </div>
   )}
 }
@@ -24,4 +28,25 @@ const ReportListItem = (report) =>
   <li><Report report={report} key={report.id} /></li>
 
 const Report = ({report}) =>
-  <p>{report.comment}</p>
+  report.comment
+
+export default styled(BodyReport)`
+  .count {
+    padding: 1em;
+    text-align: center;
+  }
+
+  > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 1em;
+    }
+
+    li:nth-child(odd) {
+      background-color: ${theme.COLOUR_PRIMARY_PALE};
+    }
+ }
+`

@@ -12,7 +12,6 @@ class Body extends React.Component {
   render () {
     return (
       <div id="body">
-        <div>Welcome, jane.smith</div>
         <Switch>
           <Route path="/report/new"  component={ReportForm} />
           <Route path="/report/:id?" component={ReportPage} />

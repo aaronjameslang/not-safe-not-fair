@@ -70,7 +70,7 @@ export default styled(BodyReport)`
       padding: 1em;
     }
 
-    li:nth-child(odd) {
+    li:nth-child(even) {
       background-color: ${theme.COLOUR_PRIMARY_PALE};
     }
  }

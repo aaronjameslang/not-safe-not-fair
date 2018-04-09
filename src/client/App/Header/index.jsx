@@ -11,7 +11,7 @@ class Header extends React.Component {
       <div id="header">
         <span>&#9776;</span>
         <Link to="/"><h1>Not Safe Not Fair</h1></Link>
-        <span>&#9776;</span>
+        <span className="user-icon">JS</span>
       </div>
     )
   }

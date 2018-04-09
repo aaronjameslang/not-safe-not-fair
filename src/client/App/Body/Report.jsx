@@ -1,6 +1,7 @@
 import React from 'react'
+import styled, { keyframes } from 'styled-components'
+
 import * as api from '../../api'
-import styled from 'styled-components'
 import * as theme from '../../theme'
 
 class BodyReport extends React.Component {
@@ -11,8 +12,17 @@ class BodyReport extends React.Component {
     const id = this.props.match.params.id
     api.getReports(id).then(reports => this.setState({reports}))
   }
+  get className() {
+    return [
+      this.props.className,
+      this.isLoading?'loading':null
+    ].join(' ')
+  }
+  get isLoading() {
+    return !this.state.reports
+  }
   render () { return (
-    <div className={this.props.className}>
+    <div className={this.className}>
       <ReportList reports={this.state.reports||[]} />
       <div class="count">
         {this.state.reports?this.state.reports.length:'Loading'} results
@@ -30,7 +40,22 @@ const ReportListItem = (report) =>
 const Report = ({report}) =>
   report.comment
 
+const kf = keyframes`to { width: 1.25em; }`
+
 export default styled(BodyReport)`
+  &.loading {
+    cursor: wait
+
+    .count:after {
+      animation: ${kf} steps(100, end) 1s infinite;
+      content: "\\2026";
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      width: 0;
+    }
+  }
+
   .count {
     padding: 1em;
     text-align: center;

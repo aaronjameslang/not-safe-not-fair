@@ -37,8 +37,21 @@ const ReportList = ({reports}) =>
 const ReportListItem = (report) =>
   <li><Report report={report} key={report.id} /></li>
 
-const Report = ({report}) =>
-  report.comment
+const Col = styled.div`display: flex; flex-direction: column`
+const Row = styled.div`display: flex; flex-direction: row`
+
+const Ago = ({timestamp}) => <div title={timestamp}>5s ago</div>
+const Position = ({x, y}) => <div>{x}, {y}</div>
+const Reasons = ({reasons}) => <ul>Reasons</ul>
+const Comment = ({comment}) => <blockquote>{comment}</blockquote>
+
+const Report = ({report}) => (
+  <Col>
+    <Row><Ago timestamp={report.ctime} /><Position {...report.position} /></Row>
+    <Reasons reasons={report.reasons} />
+    <Comment comment={report.comment} />
+  </Col>
+)
 
 const kf = keyframes`to { width: 1.25em; }`
 

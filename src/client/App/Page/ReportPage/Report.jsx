@@ -23,5 +23,5 @@ const Row = styled.div`
 const Ago = ({timestamp}) => <div title={timestamp}>5s ago</div>
 const Position = ({x, y}) => <div>{x}, {y}</div>
 const Reasons = ({reasons}) => <ul>reasons</ul>
-const Reason = reason => <li key={reason}>{reason}</li>
+// const Reason = reason => <li key={reason}>{reason}</li>
 const Comment = ({comment}) => <blockquote>{comment}</blockquote>

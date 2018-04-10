@@ -3,8 +3,9 @@ import Button from 'muicss/lib/react/button'
 import Option from 'muicss/lib/react/option'
 import Select from 'muicss/lib/react/select'
 import Textarea from 'muicss/lib/react/textarea'
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { Route, Link, Switch } from 'react-router-dom'
 import ReportPage from './ReportPage'
+import { getReportReasons } from '../../api'
 
 export default () => (
   <div>
@@ -39,7 +40,7 @@ class ReportForm extends React.Component {
   }
 
   loadReportReasons () {
-    fetch('/report/reason').then(res => res.json()).then(
+    getReportReasons().then(
       reasons => {
         console.log(reasons)
         this.setState({reasons})

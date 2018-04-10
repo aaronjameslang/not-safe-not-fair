@@ -13,7 +13,7 @@ const {
 
 const commonPlugins = [
   new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || DEBUG ? 'debug' : 'production'),
       notsafenotfair: {
         build: {
           commithash: '"' + spawnSync('git', ['rev-parse', 'HEAD']).stdout.toString().slice(0, -1) + '"',
@@ -69,7 +69,7 @@ const clientConfig = {
     new HtmlWebpackPlugin({
       title: 'Not Safe Not Fair',
       filename: 'index.html',
-      inlineSource: DEBUG ? undefined : '.'
+      inlineSource: '.'
     }),
     new HtmlWebpackInlineSourcePlugin(),
     new ExtractTextPlugin("styles.css")

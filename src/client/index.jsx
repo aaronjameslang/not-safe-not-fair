@@ -1,6 +1,8 @@
+/* global notsafenotfair:false */
+
 import React from 'react'
-import ReactDOM from "react-dom"
-import { HashRouter as Router, Route, Link } from 'react-router-dom'
+import ReactDOM from 'react-dom'
+import { HashRouter as Router } from 'react-router-dom'
 
 import './style'
 import App from './App'
@@ -12,13 +14,13 @@ console.log(
   Date(notsafenotfair.build.time).toString()
 )
 
-const eApp = document.createElement('div');
+const eApp = document.createElement('div')
 eApp.id = 'app'
-document.body.appendChild(eApp);
+document.body.appendChild(eApp)
 
 ReactDOM.render((
   <Router>
-    <App/>
+    <App />
   </Router>),
-  document.getElementById('app')
-);
+document.getElementById('app')
+)

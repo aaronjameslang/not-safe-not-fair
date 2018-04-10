@@ -9,9 +9,9 @@ app.use(express.json())
 
 app.get('/report', (req, res) => {
   pool.query('SELECT * FROM report LIMIT 1000')
-  .then(result => {
-    res.json(result.rows)
-  })
+    .then(result => {
+      res.json(result.rows)
+    })
 })
 
 app.post('/report', (req, res) => {
@@ -21,9 +21,9 @@ app.post('/report', (req, res) => {
 
 app.get('/report/reason', (req, res) => { // : void
   pool.query('SELECT * FROM report_reason')
-  .then(result => {
-    res.json(result.rows)
-  })
+    .then(result => {
+      res.json(result.rows)
+    })
 })
 
 module.exports = app

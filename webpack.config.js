@@ -1,10 +1,10 @@
-const path = require('path');
-const { spawnSync } = require('child_process');
-const webpack = require('webpack');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const { spawnSync } = require('child_process')
+const webpack = require('webpack')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const {
@@ -13,15 +13,15 @@ const {
 
 const commonPlugins = [
   new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || DEBUG ? 'debug' : 'production'),
-      notsafenotfair: {
-        build: {
-          commithash: '"' + spawnSync('git', ['rev-parse', 'HEAD']).stdout.toString().slice(0, -1) + '"',
-          dirty: spawnSync('git', ['diff', '--exit-code']).status,
-          time: Date.now(),
-        }
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || DEBUG ? 'debug' : 'production'),
+    notsafenotfair: {
+      build: {
+        commithash: '"' + spawnSync('git', ['rev-parse', 'HEAD']).stdout.toString().slice(0, -1) + '"',
+        dirty: spawnSync('git', ['diff', '--exit-code']).status,
+        time: Date.now()
       }
-    })
+    }
+  })
 ]
 
 if (!DEBUG) {
@@ -33,7 +33,7 @@ if (process.env.ANALYSE) {
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       generateStatsFile: true,
-      openAnalyzer: false,
+      openAnalyzer: false
     })
   )
 }
@@ -54,16 +54,16 @@ const clientConfig = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
-          "cache-loader",
-          'babel-loader',
+          'cache-loader',
+          'babel-loader'
         ]
       },
       {
         test: /\.s?css$/,
         use: ExtractTextPlugin.extract({
-          use: ["css-loader", "sass-loader"]
+          use: ['css-loader', 'sass-loader']
         })
-    }]
+      }]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -72,11 +72,11 @@ const clientConfig = {
       inlineSource: '.'
     }),
     new HtmlWebpackInlineSourcePlugin(),
-    new ExtractTextPlugin("styles.css")
+    new ExtractTextPlugin('styles.css')
   ].concat(commonPlugins),
   devServer: {
-    contentBase: path.join(__dirname, "deploy"),
-    host: "0.0.0.0"
+    contentBase: path.join(__dirname, 'deploy'),
+    host: '0.0.0.0'
   }
 }
 
@@ -94,14 +94,14 @@ const serverConfig = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
-          "cache-loader",
-          'babel-loader',
+          'cache-loader',
+          'babel-loader'
         ]
       }
     ]
   },
   plugins: [
-    new webpack.IgnorePlugin(/\.\/native/, /\/pg\//),
+    new webpack.IgnorePlugin(/\.\/native/, /\/pg\//)
   ].concat(commonPlugins)
 }
 

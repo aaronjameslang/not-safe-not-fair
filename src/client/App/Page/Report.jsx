@@ -12,23 +12,25 @@ class BodyReport extends React.Component {
     const id = this.props.match.params.id
     api.getReports(id).then(reports => this.setState({reports}))
   }
-  get className() {
+  get className () {
     return [
       this.props.className,
-      this.isLoading?'loading':null
+      this.isLoading ? 'loading' : null
     ].join(' ')
   }
-  get isLoading() {
+  get isLoading () {
     return !this.state.reports
   }
-  render () { return (
-    <div className={this.className}>
-      <ReportList reports={this.state.reports||[]} />
-      <div class="count">
-        {this.state.reports?this.state.reports.length:'Loading'} results
+  render () {
+    return (
+      <div className={this.className}>
+        <ReportList reports={this.state.reports || []} />
+        <div className='count'>
+          {this.state.reports ? this.state.reports.length : 'Loading'} results
+        </div>
       </div>
-    </div>
-  )}
+    )
+  }
 }
 
 const ReportList = ({reports}) =>

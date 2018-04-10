@@ -7,11 +7,11 @@ import Header from './Header'
 import Page from './Page'
 
 class App extends React.Component {
-  render() {
+  render () {
     return (
       <React.Fragment>
-        <Header/>
-        <Page/>
+        <Header />
+        <Page />
       </React.Fragment>
     )
   }

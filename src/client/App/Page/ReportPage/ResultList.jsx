@@ -22,12 +22,8 @@ export default class ResultList extends React.Component {
 const Divx = styled.div`
   > ul {
     list-style: none;
-    padding: 0;
     margin: 0;
-
-    li {
-      padding: 1em;
-    }
+    padding: 0;
 
     li:nth-child(even) {
       background-color: ${theme.COLOUR_PRIMARY_PALE};

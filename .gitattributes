@@ -1,2 +1,2 @@
-migrations/*.js binary
+migrations/**/*.js binary
 package-lock.json binary

@@ -7,9 +7,13 @@ const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
+const {
+  DEBUG
+} = process.env
+
 const commonPlugins = [
   new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || DEBUG ? 'debug' : 'production'),
       notsafenotfair: {
         build: {
           commithash: '"' + spawnSync('git', ['rev-parse', 'HEAD']).stdout.toString().slice(0, -1) + '"',
@@ -17,9 +21,12 @@ const commonPlugins = [
           time: Date.now(),
         }
       }
-    }),
-    new UglifyJsPlugin(),
+    })
 ]
+
+if (!DEBUG) {
+  commonPlugins.push(new UglifyJsPlugin())
+}
 
 if (process.env.ANALYSE) {
   commonPlugins.push(
@@ -40,6 +47,7 @@ const clientConfig = {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.css', '.scss']
   },
+  devtool: DEBUG ? 'source-map' : undefined,
   module: {
     rules: [
       {
@@ -47,12 +55,7 @@ const clientConfig = {
         exclude: /node_modules/,
         use: [
           "cache-loader",
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['babel-preset-env'],
-            }
-          }
+          'babel-loader',
         ]
       },
       {
@@ -92,12 +95,7 @@ const serverConfig = {
         exclude: /node_modules/,
         use: [
           "cache-loader",
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['babel-preset-env'],
-            }
-          }
+          'babel-loader',
         ]
       }
     ]

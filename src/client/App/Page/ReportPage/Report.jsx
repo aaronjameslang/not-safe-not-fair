@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import moment from 'moment'
 
 export default (props) => (
   <$Div className='report'>
@@ -20,7 +21,7 @@ const Row = styled.div`
   justify-content: space-between;
 `
 
-const Ago = ({timestamp}) => <div title={timestamp}>5s ago</div>
+const Ago = ({timestamp}) => <div title={timestamp}>{moment(timestamp).fromNow()}</div>
 const Position = ({x, y}) => <div>{x}, {y}</div>
 const Reasons = ({reasons}) => <ul>reasons</ul>
 // const Reason = reason => <li key={reason}>{reason}</li>

@@ -45,7 +45,7 @@ const clientConfig = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.css', '.scss']
+    extensions: ['.js', '.jsx']
   },
   devtool: DEBUG ? 'source-map' : undefined,
   module: {

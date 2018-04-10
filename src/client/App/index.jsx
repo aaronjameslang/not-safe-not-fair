@@ -4,14 +4,14 @@ import { BrowserRouter, Route, Link } from 'react-router-dom'
 import './style'
 
 import Header from './Header'
-import Body from './Body'
+import Page from './Page'
 
 class App extends React.Component {
   render() {
     return (
       <React.Fragment>
         <Header/>
-        <Body/>
+        <Page/>
       </React.Fragment>
     )
   }

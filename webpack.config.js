@@ -57,13 +57,8 @@ const clientConfig = {
           'cache-loader',
           'babel-loader'
         ]
-      },
-      {
-        test: /\.s?css$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'sass-loader']
-        })
-      }]
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -72,7 +67,6 @@ const clientConfig = {
       inlineSource: '.'
     }),
     new HtmlWebpackInlineSourcePlugin(),
-    new ExtractTextPlugin('styles.css')
   ].concat(commonPlugins),
   devServer: {
     contentBase: path.join(__dirname, 'deploy'),

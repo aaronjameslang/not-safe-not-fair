@@ -13,7 +13,7 @@
     "posttest": "eslint --fix --ext .js,.jsx . && git diff --exit-code",
     "pretest": "webpack",
     "psql": "docker run -it --rm --network=notsafenotfair_default --env-file .env --mount type=bind,src=$PWD,dst=/nsnf -w /nsnf postgres:9.6-alpine psql",
-    "start": "webpack && npm run start:db && npm run start:api",
+    "start": "npm run start:db && npm run start:api & webpack -w",
     "start:api": "node .env.js && sam local start-api --docker-network=notsafenotfair_default --env-vars .env.json",
     "start:db": "docker-compose up -d",
     "stop": "npm run stop:db",

@@ -1,21 +1,21 @@
-import Button from 'muicss/lib/react/button'
-import Option from 'muicss/lib/react/option'
 import React from 'react'
-import Select from 'muicss/lib/react/select'
-import Textarea from 'muicss/lib/react/textarea'
+import TextField from 'material-ui/TextField'
+import Button from 'material-ui/Button';
 import styled from 'styled-components'
+import Select from 'material-ui/Select';
+import { MenuItem } from 'material-ui/Menu';
 
 import { getReportReasons } from '../../api'
 
 export default () => (
   <$form>
     <ReasonSelect label='I wish to report:' />
-    <Select label='Location:'>
-      <Option value="1,1" label="Current Location (12'34'' 89'67'')" />
-      <Option value="2,2" label="St. Thomas' Hospital" />
-      <Option value="3,3" label='Waterloo Infirmary' />
+    <Select value={0} floatingLabelText='Location:'>
+      <MenuItem value="1,1" >Current Location (12'34'' 89'67'')</MenuItem>
+      <MenuItem value="2,2" >Tommies</MenuItem>
+      <MenuItem value="3,3" >BRI</MenuItem>
     </Select>
-    <Textarea placeholder='Details' />
+    <TextField hintText='Details' />
     <Button variant='raised' color='primary'>Cancel</Button>
     <Button variant='raised' color='primary'>Report</Button>
   </$form>
@@ -23,6 +23,8 @@ export default () => (
 
 const $form = styled.form`
   padding: 1em;
+  display: flex;
+  flex-direction: column;
 `
 
 class ReasonSelect extends React.Component {
@@ -39,8 +41,8 @@ class ReasonSelect extends React.Component {
   }
   render () {
     return (
-      <Select {...this.props}>
-        { this.state.reasons.map(reason => <Option value={reason.name} label={reason.label} />)}
+      <Select value={0} {...this.props}>
+        { this.state.reasons.map(reason => <MenuItem value={reason.name} >{reason.label}</MenuItem>)}
       </Select>
     )
   }

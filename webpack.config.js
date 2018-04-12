@@ -2,7 +2,6 @@ const path = require('path')
 const { spawnSync } = require('child_process')
 const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -66,7 +65,7 @@ const clientConfig = {
       filename: 'index.html',
       inlineSource: '.'
     }),
-    new HtmlWebpackInlineSourcePlugin(),
+    new HtmlWebpackInlineSourcePlugin()
   ].concat(commonPlugins),
   devServer: {
     contentBase: path.join(__dirname, 'deploy'),

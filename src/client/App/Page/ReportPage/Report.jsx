@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
-
-import * as theme from '../../../theme'
+import { withTheme } from 'material-ui/styles'
 
 export default (props) => (
   <$div className='report'>
@@ -29,14 +28,14 @@ const Reasons = ({reasons}) => <ul>reasons</ul>
 // const Reason = reason => <li key={reason}>{reason}</li>
 
 const Comment = ({comment}) => <$blockquote>{comment}</$blockquote>
-const $blockquote = styled.blockquote`
+const $blockquote = withTheme()(styled.blockquote`
   margin: 0;
 
   &::before {
     content: "\\201C";
-    color: ${theme.COLOUR_PRIMARY};
+    color: ${props => props.theme.palette.primary.main};
     vertical-align: -0.25em;
     line-height: 0;
     font-size: 2em;
   }
-`
+`)

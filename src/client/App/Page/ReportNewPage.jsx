@@ -11,9 +11,9 @@ export default () => (
   <$form>
     <ReasonSelect label='I wish to report:' />
     <Select label='Location:'>
-      <Option value="1,1" label="Current Location (12'34'' 89'67'')" />
-      <Option value="2,2" label="St. Thomas' Hospital" />
-      <Option value="3,3" label='Waterloo Infirmary' />
+      <Option value='1,1' label="Current Location (12'34'' 89'67'')" />
+      <Option value='2,2' label="St. Thomas' Hospital" />
+      <Option value='3,3' label='Waterloo Infirmary' />
     </Select>
     <Textarea placeholder='Details' />
     <Button variant='raised' color='primary'>Cancel</Button>
@@ -45,4 +45,3 @@ class ReasonSelect extends React.Component {
     )
   }
 }
-

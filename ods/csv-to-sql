@@ -1,0 +1,42 @@
+#! env node
+
+const csv = require('csv')
+const fs = require('fs')
+
+const csvFile = fs.createReadStream('etrust.csv')
+const sqlFile = fs.createWriteStream('etrust.sql')
+
+let row = 1
+
+const transformer = record => {
+
+  const fields = [
+    record[0], // id
+    record[1], // name
+    record[4], // address
+    record[9], // postcode
+  ]
+
+  const escape = x => x.split("'").join("''")
+  const wrap = x => "'" + x + "'"
+
+  let recordStr = fields.map(escape).map(wrap).join(', ')
+
+  recordStr = `(${recordStr})`
+
+  if (row % 1000 === 1) {
+    recordStr = 'INSERT INTO location (code, name, address, postcode) VALUES\n' + recordStr
+    row += 1
+  }
+  
+  recordStr += (row % 1000 === 0) ? ';' : ','
+  recordStr += '\n'
+  row += 1
+
+  return recordStr
+}
+
+csvFile
+  .pipe(csv.parse())
+  .pipe(csv.transform(transformer))
+  .pipe(sqlFile)

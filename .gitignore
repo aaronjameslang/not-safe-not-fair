@@ -1,4 +1,9 @@
-.cache-loader
-.env.json
-deploy
-node_modules
+/.cache-loader
+/.env.json
+/deploy
+/node_modules
+/ods/e*.csv
+/ods/e*.pdf
+/ods/e*.sql
+/ods/e*.zip
+

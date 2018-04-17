@@ -1,6 +1,0 @@
-#! /bin/sh
-set -eu
-
-curl -O https://s3.eu-west-2.amazonaws.com/files.nhsd.io/assets/ods/current/etrust.zip
-tar -xf etrust.zip
-

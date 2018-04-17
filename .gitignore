@@ -1,9 +1,8 @@
 /.cache-loader
 /.env.json
+/configuration/*.csv
+/configuration/*.pdf
+/configuration/*.sql
+/configuration/*.zip
 /deploy
 /node_modules
-/ods/e*.csv
-/ods/e*.pdf
-/ods/e*.sql
-/ods/e*.zip
-

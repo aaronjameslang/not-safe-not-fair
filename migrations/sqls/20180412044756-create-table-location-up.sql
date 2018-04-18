@@ -1,6 +1,12 @@
 CREATE SCHEMA configuration;
+
+CREATE TABLE configuration.outcode (
+  code varchar(4) NOT NULL PRIMARY KEY,
+  position point NOT NULL
+);
+
 CREATE TABLE configuration.location (
-  code char(5) NOT NULL PRIMARY KEY,
+  code varchar(6) NOT NULL PRIMARY KEY,
   name varchar(100) NOT NULL,
   address varchar(35) NOT NULL,
   postcode varchar(8) NOT NULL,

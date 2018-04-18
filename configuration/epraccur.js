@@ -4,8 +4,8 @@ const csv = require('csv')
 const fs = require('fs')
 const { pipe } = require('ramda')
 
-const csvFile = fs.createReadStream('outcode.csv')
-const sqlFile = fs.createWriteStream('outcode.sql')
+const csvFile = fs.createReadStream('epraccur.csv')
+const sqlFile = fs.createWriteStream('epraccur.sql')
 
 let row = 1
 const prependHeaderEtc = table => columns => recordStr => {
@@ -26,15 +26,28 @@ const prependHeaderEtc = table => columns => recordStr => {
 }
 
 const recordToStr = record => {
-  const code = record[1]
-  const x = Number(record[3])
-  const y = Number(record[2])
-  return (x || y) ? `('${code}', point(${x}, ${y}))` : false
+  const escape = x => x.split("'").join("''")
+  const quote = x => "'" + x + "'"
+  const fields = [
+    record[0], // code
+    record[1], // name
+    record[4], // address
+    record[9], // postcode
+    record[9].split(' ')[0] // outcode
+  ].map(escape).map(quote).join(', ')
+
+  return `(${fields})`
 }
 
 const transformer = pipe(
   recordToStr,
-  prependHeaderEtc('configuration.outcode')(['code', 'position'])
+  prependHeaderEtc('configuration.location')([
+    'code',
+    'name',
+    'address',
+    'postcode',
+    'outcode'
+  ])
 )
 
 csvFile

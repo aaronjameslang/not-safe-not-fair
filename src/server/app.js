@@ -7,11 +7,16 @@ const pool = new Pool()
 app.use(express.static('static'))
 app.use(express.json())
 
+const rowsToJson = res => ({rows}) => res.json(rows)
+
 app.get('/report', (req, res) => {
-  pool.query('SELECT * FROM report LIMIT 1000')
-    .then(result => {
-      res.json(result.rows)
-    })
+  pool.query(`
+    SELECT *, l.name AS location_name
+      FROM report
+      JOIN configuration.location AS l
+        ON report.location_code = l.code
+     LIMIT 1000
+  `).then(rowsToJson(res))
 })
 
 app.post('/report', (req, res) => {
@@ -25,8 +30,6 @@ app.get('/report/reason', (req, res) => { // : void
       res.json(result.rows)
     })
 })
-
-const rowsToJson = res => ({rows}) => res.json(rows)
 
 app.get('/outcode', (req, res) => {
   const { x, y } = req.query

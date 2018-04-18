@@ -5,7 +5,10 @@ import { withTheme } from 'material-ui/styles'
 
 export default (props) => (
   <$div className='report'>
-    <Row><Ago timestamp={props.ctime} /><Position {...props.position} /></Row>
+    <Row>
+      <Ago timestamp={props.ctime} />
+      <Location location={props.location_name} />
+    </Row>
     <Reasons reasons={props.reasons} />
     <Comment comment={props.comment} />
   </$div>
@@ -23,7 +26,8 @@ const Row = styled.div`
 `
 
 const Ago = ({timestamp}) => <div title={timestamp}>{moment(timestamp).fromNow()}</div>
-const Position = ({x, y}) => <div>{x}, {y}</div>
+const Location = ({location}) => <$location>{location.toLowerCase()}</$location>
+const $location = styled.div`text-transform: capitalize`
 const Reasons = ({reasons}) => <ul>reasons</ul>
 // const Reason = reason => <li key={reason}>{reason}</li>
 

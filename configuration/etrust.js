@@ -33,7 +33,7 @@ const recordToStr = record => {
     record[1], // name
     record[4], // address
     record[9], // postcode
-    record[9].split(' ')[0], // outcode
+    record[9].split(' ')[0] // outcode
   ].map(escape).map(quote).join(', ')
 
   return `(${fields})`
@@ -46,7 +46,7 @@ const transformer = pipe(
     'name',
     'address',
     'postcode',
-    'outcode',
+    'outcode'
   ])
 )
 
@@ -55,4 +55,3 @@ csvFile
   .pipe(csv.transform(transformer))
   .on('end', () => { sqlFile.write(';\n') })
   .pipe(sqlFile)
-

@@ -12,3 +12,7 @@ CREATE TABLE configuration.location (
   postcode varchar(8) NOT NULL,
   outcode varchar(4) NOT NULL
 );
+
+ALTER TABLE report
+DROP COLUMN position,
+ ADD COLUMN location_code varchar(6) NOT NULL REFERENCES configuration.location(code);

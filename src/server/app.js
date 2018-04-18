@@ -36,9 +36,9 @@ app.get('/outcode', (req, res) => {
   const sql = `
     SELECT *
       FROM configuration.outcode
-     ORDER BY position <-> point(${x}, ${y})
+     ORDER BY position <-> point($1, $2)
   `
-  pool.query(sql).then(rowsToJson(res))
+  pool.query(sql, [x, y]).then(rowsToJson(res))
 })
 
 app.get('/location', (req, res) => {
@@ -48,10 +48,10 @@ app.get('/location', (req, res) => {
       FROM configuration.location AS l
       JOIN configuration.outcode  AS o
         ON l.outcode = o.code
-     ORDER BY position <-> point(${x}, ${y})
+     ORDER BY position <-> point($1, $2)
      LIMIT 100
   `
-  pool.query(sql).then(rowsToJson(res))
+  pool.query(sql, [x, y]).then(rowsToJson(res))
 })
 
 module.exports = app

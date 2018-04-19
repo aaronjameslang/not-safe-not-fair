@@ -6,47 +6,8 @@ import { MenuItem } from 'material-ui/Menu'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import ClearIcon from '@material-ui/icons/Clear'
-import Select from 'react-select'
-
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-  { label: 'Algeria' },
-  { label: 'American Samoa' },
-  { label: 'Andorra' },
-  { label: 'Angola' },
-  { label: 'Anguilla' },
-  { label: 'Antarctica' },
-  { label: 'Antigua and Barbuda' },
-  { label: 'Argentina' },
-  { label: 'Armenia' },
-  { label: 'Aruba' },
-  { label: 'Australia' },
-  { label: 'Austria' },
-  { label: 'Azerbaijan' },
-  { label: 'Bahamas' },
-  { label: 'Bahrain' },
-  { label: 'Bangladesh' },
-  { label: 'Barbados' },
-  { label: 'Belarus' },
-  { label: 'Belgium' },
-  { label: 'Belize' },
-  { label: 'Benin' },
-  { label: 'Bermuda' },
-  { label: 'Bhutan' },
-  { label: 'Bolivia, Plurinational State of' },
-  { label: 'Bonaire, Sint Eustatius and Saba' },
-  { label: 'Bosnia and Herzegovina' },
-  { label: 'Botswana' },
-  { label: 'Bouvet Island' },
-  { label: 'Brazil' },
-  { label: 'British Indian Ocean Territory' },
-  { label: 'Brunei Darussalam' }
-].map(suggestion => ({
-  value: suggestion.label,
-  label: suggestion.label
-}))
+import { Async } from 'react-select'
+import * as api from '../../api'
 
 class Option extends React.Component {
   render () {
@@ -65,7 +26,7 @@ class Option extends React.Component {
 
 function SelectWrapped (props) {
   return (
-    <Select
+    <Async
       // Style
       optionComponent={Option}
       noResultsText={<Typography>{'No results found'}</Typography>}
@@ -180,7 +141,9 @@ const styles = theme => ({
   }
 })
 
-class IntegrationReactSelect extends React.Component {
+const Xyz = withStyles(styles)(SelectWrapped)
+
+export default class IntegrationReactSelect extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -199,16 +162,22 @@ class IntegrationReactSelect extends React.Component {
         fullWidth
         placeholder='Search a country (start with a)'
         // Use SelectWrapped to enable auto-complete
-        inputComponent={SelectWrapped}
+        inputComponent={Xyz}
         value={this.state.value}
         onChange={this.onChange}
 
         inputProps={{
-          options: suggestions
+          loadOptions: (input, callback) => {
+            api.getLocations(input)
+              .then(locations =>
+                locations.map(l => ({ value: l.code, label: l.name }))
+              ).then(options => {
+                callback(null, {options})
+              })
+          },
+          simpleValue: true
         }}
       />
     )
   }
 }
-
-export default withStyles(styles)(IntegrationReactSelect)

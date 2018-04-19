@@ -8,6 +8,7 @@ import { FormControl } from 'material-ui/Form';
 import { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu'
 
+import LocationInput from './LocationInput'
 import { getReportReasons } from '../../api'
 
 export default class extends React.Component {
@@ -15,12 +16,8 @@ export default class extends React.Component {
     return (
       <$form>
         <ReasonSelect onChange={reason => this.setState({reason})} />
-        <Select value={0} floatingLabelText='Location:'>
-          <MenuItem value='1,1' >Current Location (12'34'' 89'67'')</MenuItem>
-          <MenuItem value='2,2' >Tommies</MenuItem>
-          <MenuItem value='3,3' >BRI</MenuItem>
-        </Select>
-        <TextField hintText='Details' />
+        <LocationInput />
+        <TextField />
         <Button variant='raised' color='primary'>Cancel</Button>
         <Button variant='raised' color='primary'>Report</Button>
       </$form>
@@ -48,7 +45,7 @@ class ReasonSelect extends React.Component {
     )
   }
   nameToLabel (name) {
-      return find(propEq('name', name))(this.state.reasons).label
+      return find(propEq('name', name))(this.state.reasons).label // TODO reason service
   }
   onChange (event) {
       const { value } = event.target
@@ -70,7 +67,7 @@ class ReasonSelect extends React.Component {
                 </React.Fragment>
             )}
         >
-          { this.state.reasons.map(reason => <MenuItem value={reason.name} >{reason.label}</MenuItem>)}
+          { this.state.reasons.map(reason => <MenuItem key={reason.name} value={reason.name} >{reason.label}</MenuItem>)}
         </Select>
       </FormControl>
     )

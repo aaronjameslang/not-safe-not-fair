@@ -45,30 +45,29 @@ class ReasonSelect extends React.Component {
       }
     )
   }
-  nameToLabel (name) {
-    return find(propEq('name', name))(this.state.reasons).label // TODO reason service
-  }
   onChange (event) {
     const { value } = event.target
     this.setState({value})
     this.props.onChange(value)
   }
   render () {
+    const ReasonMenuItem = reason =>
+      <MenuItem key={reason.name} value={reason.name}>{reason.label}</MenuItem>
+    const ReasonMenuItems = reasons => 
+      <React.Fragment>{reasons.map(ReasonMenuItem)}</React.Fragment>
+    const findReason = name => find(propEq('name', name), this.state.reasons)
+    const ReasonMenuItemsN = names => ReasonMenuItems(names.map(findReason))
     return (
       <FormControl>
         <InputLabel htmlFor={this.id}>I wish to report:</InputLabel>
         <Select
-          multiple
           inputProps={{id: this.id}}
+          multiple
           onChange={this.onChange}
+          renderValue={ReasonMenuItemsN}
           value={this.state.value}
-          renderValue={value => (
-            <React.Fragment>
-              {value.map(value => <MenuItem key={value}>{this.nameToLabel(value)}</MenuItem>)}
-            </React.Fragment>
-          )}
         >
-          { this.state.reasons.map(reason => <MenuItem key={reason.name} value={reason.name} >{reason.label}</MenuItem>)}
+          { this.state.reasons.map(ReasonMenuItem)}
         </Select>
       </FormControl>
     )

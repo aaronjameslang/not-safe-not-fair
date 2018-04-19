@@ -1,13 +1,11 @@
-import React from 'react'
-import { withStyles } from 'material-ui/styles'
-import Typography from 'material-ui/Typography'
-import Input from 'material-ui/Input'
-import { MenuItem } from 'material-ui/Menu'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import ClearIcon from '@material-ui/icons/Clear'
+import React from 'react'
+import Typography from 'material-ui/Typography'
 import { Async } from 'react-select'
-import * as api from '../../api'
+import { MenuItem } from 'material-ui/Menu'
+import { withStyles } from 'material-ui/styles'
 
 class Option extends React.Component {
   render () {
@@ -24,19 +22,17 @@ class Option extends React.Component {
   }
 }
 
-function SelectWrapped (props) {
-  return (
-    <Async
-      // Style
-      optionComponent={Option}
-      noResultsText={<Typography>{'No results found'}</Typography>}
-      arrowRenderer={({isOpen}) => isOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-      clearRenderer={() => <ClearIcon />}
-      // Pass everything else straight through
-      {...props}
-    />
-  )
-}
+const Select = props => (
+  <Async
+    // Style
+    optionComponent={Option}
+    noResultsText={<Typography>{'No results found'}</Typography>}
+    arrowRenderer={({isOpen}) => isOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+    clearRenderer={() => <ClearIcon />}
+    // Pass everything else straight through
+    {...props}
+  />
+)
 
 const ITEM_HEIGHT = 48
 
@@ -141,43 +137,4 @@ const styles = theme => ({
   }
 })
 
-const Xyz = withStyles(styles)(SelectWrapped)
-
-export default class IntegrationReactSelect extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      value: ''
-    }
-
-    this.onChange = value => {
-      console.log(value)
-      this.setState({value})
-    }
-  }
-  render () {
-    return (
-    // Use Input so it's styled right
-      <Input
-        fullWidth
-        placeholder='Search a country (start with a)'
-        // Use SelectWrapped to enable auto-complete
-        inputComponent={Xyz}
-        value={this.state.value}
-        onChange={this.onChange}
-
-        inputProps={{
-          loadOptions: (input, callback) => {
-            api.getLocations(input)
-              .then(locations =>
-                locations.map(l => ({ value: l.code, label: l.name }))
-              ).then(options => {
-                callback(null, {options})
-              })
-          },
-          simpleValue: true
-        }}
-      />
-    )
-  }
-}
+export default withStyles(styles)(Select)

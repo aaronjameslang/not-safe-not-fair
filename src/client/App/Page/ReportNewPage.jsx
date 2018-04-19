@@ -1,11 +1,12 @@
-import React from 'react'
-import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
-import styled from 'styled-components'
+import { find, propEq } from 'ramda'
+import React from 'react'
 import Select from 'material-ui/Select'
-import { MenuItem } from 'material-ui/Menu'
+import TextField from 'material-ui/TextField'
+import styled from 'styled-components'
 import { FormControl } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
+import { InputLabel } from 'material-ui/Input';
+import { MenuItem } from 'material-ui/Menu'
 
 import { getReportReasons } from '../../api'
 
@@ -38,13 +39,16 @@ class ReasonSelect extends React.Component {
     this.id = Math.random()
     this.state = {
       reasons: [],
-      value: ''
+      value: []
     }
     getReportReasons().then(
       reasons => {
         this.setState({reasons})
       }
     )
+  }
+  nameToLabel (name) {
+      return find(propEq('name', name))(this.state.reasons).label
   }
   onChange (event) {
       const { value } = event.target
@@ -56,9 +60,15 @@ class ReasonSelect extends React.Component {
       <FormControl>
         <InputLabel htmlFor={this.id}>I wish to report:</InputLabel>
         <Select
+          multiple
           inputProps={{id: this.id}}
           onChange={::this.onChange}
           value={this.state.value}
+            renderValue={value => (
+                <React.Fragment>
+                    {value.map(value => <MenuItem key={value}>{this.nameToLabel(value)}</MenuItem>)}
+                </React.Fragment>
+            )}
         >
           { this.state.reasons.map(reason => <MenuItem value={reason.name} >{reason.label}</MenuItem>)}
         </Select>

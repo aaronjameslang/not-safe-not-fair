@@ -53,7 +53,7 @@ class ReasonSelect extends React.Component {
   render () {
     const ReasonMenuItem = reason =>
       <MenuItem key={reason.name} value={reason.name}>{reason.label}</MenuItem>
-    const ReasonMenuItems = reasons => 
+    const ReasonMenuItems = reasons =>
       <React.Fragment>{reasons.map(ReasonMenuItem)}</React.Fragment>
     const findReason = name => find(propEq('name', name), this.state.reasons)
     const ReasonMenuItemsN = names => ReasonMenuItems(names.map(findReason))

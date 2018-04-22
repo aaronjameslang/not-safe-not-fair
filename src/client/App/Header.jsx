@@ -1,6 +1,6 @@
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import AppBar from 'material-ui/AppBar'
-import Link from '../../components/Link'
+import Link from '../components/Link'
 import MenuIcon from '@material-ui/icons/Menu'
 import React from 'react'
 import Toolbar from 'material-ui/Toolbar'

@@ -16,6 +16,9 @@
     "start": "npm run start:db && npm run start:api & webpack -w",
     "start:api": "node .env.js && sam local start-api --docker-network=notsafenotfair_default --env-vars .env.json",
     "start:db": "docker-compose up -d",
+    "stats": "npm run stats:client & npm run stats:server",
+    "stats:client": "webpack --config webpack.config.client.js --profile --json > stats.client.json",
+    "stats:server": "webpack --config webpack.config.server.js --profile --json > stats.server.json",
     "stop": "npm run stop:db",
     "stop:db": "docker-compose down"
   },

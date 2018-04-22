@@ -6,3 +6,4 @@
 /configuration/*.zip
 /deploy
 /node_modules
+/stats.*.json

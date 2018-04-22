@@ -5,6 +5,7 @@ import CssBaseline from 'material-ui/CssBaseline'
 import { withTheme } from 'material-ui/styles'
 import { HashRouter as Router } from 'react-router-dom'
 
+import Footer from './Footer'
 import Header from './Header'
 import Page from './Page'
 import theme from '../services/theme'
@@ -18,6 +19,7 @@ export default() => (
       <MuiThemeProvider theme={theme}>
         <Header />
         <Page />
+        <Footer />
       </MuiThemeProvider>
     </Router>
   </$Div>

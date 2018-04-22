@@ -1,31 +1,27 @@
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import AppBar from 'material-ui/AppBar'
+import Link from '../../components/Link'
+import MenuIcon from '@material-ui/icons/Menu'
 import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { withTheme } from 'material-ui/styles'
+import Toolbar from 'material-ui/Toolbar'
+import Typography from 'material-ui/Typography'
+import { withStyles } from 'material-ui/styles'
 
-export default () => (
-  <$Div id='header'>
-    <span>&#9776;</span>
-    <Link to='/'><h1>Not Safe Not Fair</h1></Link>
-    <span className='user-icon'>JS</span>
-  </$Div>
-)
-
-const colour = props => props.theme.palette.primary.main
-const colourContrast = props => props.theme.palette.primary.contrastText
-
-const $Div = withTheme()(styled.div`
-  align-items: center;
-  background-color: ${colour};
-  color: ${colourContrast};
-  display: flex;
-  justify-content: space-between;
-  padding: 1em;
-  h1 {
-    margin: 0;
+export default withStyles({
+  row: {
+    display: 'flex',
+    'justifyContent': 'space-between'
   }
-  a {
-    color: ${colourContrast};
-    text-decoration: none;
-  }
-`)
+})(({classes}) => (
+  <AppBar position='static'>
+    <Toolbar className={classes.row} >
+      <MenuIcon />
+      <Link to='/'>
+        <Typography variant='title' color='inherit'>
+        Not Safe Not Fair
+        </Typography>
+      </Link>
+      <AccountCircle />
+    </Toolbar>
+  </AppBar>
+))

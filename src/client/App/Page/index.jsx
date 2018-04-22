@@ -1,6 +1,7 @@
 import React from 'react'
-import { Route, Link, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
+import HomePage from './HomePage'
 import ReportNewPage from './ReportNewPage'
 import ReportPage from './ReportPage'
 
@@ -9,17 +10,7 @@ export default () => (
     <Switch>
       <Route path='/report/new' component={ReportNewPage} />
       <Route path='/report/:id?' component={ReportPage} />
-      <Route component={Dashboard} />
+      <Route component={HomePage} />
     </Switch>
   </div>
 )
-
-class Dashboard extends React.Component {
-  render () {
-    return (
-      <div>
-        <Link to='/report'>Report</Link>
-      </div>
-    )
-  }
-}

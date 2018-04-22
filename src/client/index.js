@@ -2,7 +2,6 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { HashRouter as Router } from 'react-router-dom'
 
 import App from './App'
 
@@ -17,9 +16,7 @@ const eApp = document.createElement('div')
 eApp.id = 'app'
 document.body.appendChild(eApp)
 
-ReactDOM.render((
-  <Router>
-    <App />
-  </Router>),
-document.getElementById('app')
+ReactDOM.render(
+  React.createElement(App),
+  document.getElementById('app')
 )

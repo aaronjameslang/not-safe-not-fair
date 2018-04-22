@@ -8,12 +8,15 @@ import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
 
 export default withStyles({
+  flat: {
+    boxShadow: 'unset'
+  },
   row: {
     display: 'flex',
     'justifyContent': 'space-between'
   }
 })(({classes}) => (
-  <AppBar position='static'>
+  <AppBar className={classes.flat} position='static'>
     <Toolbar className={classes.row} >
       <MenuIcon />
       <Link to='/'>

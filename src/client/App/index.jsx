@@ -1,17 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import CssBaseline from 'material-ui/CssBaseline'
+import { withTheme } from 'material-ui/styles'
 
 import Header from './Header'
 import Page from './Page'
-import { FONT_FAMILY } from '../theme'
+import theme from '../theme'
 
-export default () => (
+const themeFontFamily = props => props.theme.typography.fontFamily
+
+export default() => (
   <$Div className='app'>
-    <Header />
-    <Page />
+    <CssBaseline />
+    <MuiThemeProvider theme={theme}>
+      <Header />
+      <Page />
+    </MuiThemeProvider>
   </$Div>
 )
 
-const $Div = styled.div`
-  font-family: ${FONT_FAMILY};
-`
+const $Div = withTheme()(styled.div`
+  font-family: ${themeFontFamily};
+`)

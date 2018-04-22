@@ -4,8 +4,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter as Router } from 'react-router-dom'
 
-import 'muicss/lib/sass/mui.scss'
-
 import App from './App'
 
 console.log(

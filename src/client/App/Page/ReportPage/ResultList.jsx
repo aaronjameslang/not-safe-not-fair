@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-
-import * as theme from '../../../theme'
+import { withTheme } from 'material-ui/styles'
 
 export default class ResultList extends React.Component {
   get className () {
@@ -21,17 +20,17 @@ export default class ResultList extends React.Component {
   }
 }
 
-const Divx = styled.div`
+const Divx = withTheme()(styled.div`
   > ul {
     list-style: none;
     margin: 0;
     padding: 0;
 
     li:nth-child(even) {
-      background-color: ${theme.COLOUR_PRIMARY_PALE};
+      background-color: ${props => props.theme.palette.primary.tint};
     }
  }
-`
+`)
 
 const List = ({results, Result}) =>
   <ul>{results.map(ListItem(Result))}</ul>

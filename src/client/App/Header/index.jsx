@@ -1,8 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
 import styled from 'styled-components'
-import * as theme from '../../theme'
+import { Link } from 'react-router-dom'
+import { withTheme } from 'material-ui/styles'
 
 export default () => (
   <$Div id='header'>
@@ -12,10 +11,13 @@ export default () => (
   </$Div>
 )
 
-const $Div = styled.div`
+const colour = props => props.theme.palette.primary.main
+const colourContrast = props => props.theme.palette.primary.contrastText
+
+const $Div = withTheme()(styled.div`
   align-items: center;
-  background-color: ${theme.COLOUR_PRIMARY};
-  color: ${theme.COLOUR_WHITE};
+  background-color: ${colour};
+  color: ${colourContrast};
   display: flex;
   justify-content: space-between;
   padding: 1em;
@@ -23,7 +25,7 @@ const $Div = styled.div`
     margin: 0;
   }
   a {
-    color: ${theme.COLOUR_WHITE};
+    color: ${colourContrast};
     text-decoration: none;
   }
-`
+`)

@@ -1,6 +1,6 @@
 import React from 'react'
+import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 import styled from 'styled-components'
-import moment from 'moment'
 import { withTheme } from 'material-ui/styles'
 
 export default (props) => (
@@ -25,7 +25,8 @@ const Row = styled.div`
   justify-content: space-between;
 `
 
-const Ago = ({timestamp}) => <div title={timestamp}>{moment(timestamp).fromNow()}</div>
+const Ago = ({timestamp}) => <div title={timestamp}>{timeAgo(timestamp)}</div>
+const timeAgo = timestamp => distanceInWordsStrict(Date.now(), new Date(timestamp), {addSuffix: true})
 const Location = ({location}) => <$location>{location.toLowerCase()}</$location>
 const $location = styled.div`text-transform: capitalize`
 const Reasons = ({reasons}) => <ul>reasons</ul>

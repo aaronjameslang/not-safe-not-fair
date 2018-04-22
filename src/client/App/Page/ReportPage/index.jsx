@@ -1,6 +1,6 @@
 import React from 'react'
 
-import * as api from '../../../api'
+import * as api from '../../../services/api'
 import ResultList from './ResultList'
 import Report from './Report'
 

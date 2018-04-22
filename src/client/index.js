@@ -12,11 +12,7 @@ console.log(
   Date(notsafenotfair.build.time).toString()
 )
 
-const eApp = document.createElement('div')
-eApp.id = 'app'
-document.body.appendChild(eApp)
+const app = document.createElement('div')
+document.body.appendChild(app)
 
-ReactDOM.render(
-  React.createElement(App),
-  document.getElementById('app')
-)
+ReactDOM.render(React.createElement(App), app)

@@ -7,7 +7,7 @@ import { HashRouter as Router } from 'react-router-dom'
 
 import Header from './Header'
 import Page from './Page'
-import theme from '../theme'
+import theme from '../services/theme'
 
 const themeFontFamily = props => props.theme.typography.fontFamily
 

@@ -8,7 +8,7 @@ import { FormControl } from 'material-ui/Form'
 import { MenuItem } from 'material-ui/Menu'
 import { find, propEq } from 'ramda'
 
-import { getLocations, getReportReasons } from '../../api'
+import { getLocations, getReportReasons } from '../../services/api'
 import AutoComplete from '../../components/AutoComplete'
 
 export default class extends React.Component {

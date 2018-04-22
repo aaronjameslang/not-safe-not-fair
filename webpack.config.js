@@ -38,7 +38,7 @@ if (process.env.ANALYSE) {
 }
 
 const clientConfig = {
-  entry: './src/client/index.jsx',
+  entry: './src/client/index.js',
   output: {
     path: path.resolve(__dirname, 'deploy', 'static'),
     filename: 'bundle.js'

@@ -2,7 +2,6 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { HashRouter as Router } from 'react-router-dom'
 
 import App from './App'
 
@@ -13,13 +12,9 @@ console.log(
   Date(notsafenotfair.build.time).toString()
 )
 
-const eApp = document.createElement('div')
-eApp.id = 'app'
-document.body.appendChild(eApp)
+const app = document.createElement('div')
+document.body.appendChild(app);
 
-ReactDOM.render((
-  <Router>
-    <App />
-  </Router>),
-document.getElementById('app')
-)
+([document.documentElement, document.body, app]).forEach(e => { e.style.height = '100%' })
+
+ReactDOM.render(React.createElement(App), app)

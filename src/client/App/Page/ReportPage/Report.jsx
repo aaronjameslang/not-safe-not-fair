@@ -1,7 +1,7 @@
 import React from 'react'
 import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 import styled from 'styled-components'
-import { withTheme } from 'material-ui/styles'
+import withTheme from 'material-ui/styles/withTheme'
 
 export default (props) => (
   <$div className='report'>

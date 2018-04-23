@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { withTheme } from 'material-ui/styles'
+import withTheme from 'material-ui/styles/withTheme'
 
 export default class ResultList extends React.Component {
   get className () {

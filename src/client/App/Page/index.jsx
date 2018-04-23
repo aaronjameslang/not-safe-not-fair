@@ -1,6 +1,7 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import {withStyles} from 'material-ui'
+import Route from 'react-router-dom/Route'
+import Switch from 'react-router-dom/Switch'
+import withStyles from 'material-ui/styles/withStyles'
 
 import HomePage from './HomePage'
 import ReportNewPage from './ReportNewPage'

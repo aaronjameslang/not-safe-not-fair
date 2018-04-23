@@ -1,6 +1,6 @@
 import React from 'react'
 import Typography from 'material-ui/Typography'
-import {withStyles} from 'material-ui'
+import withStyles from 'material-ui/styles/withStyles'
 
 export default withStyles({
   space: {

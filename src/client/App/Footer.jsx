@@ -1,8 +1,9 @@
-import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation'
+import BottomNavigation from 'material-ui/BottomNavigation'
+import BottomNavigationAction from 'material-ui/BottomNavigation/BottomNavigationAction'
 import IconFindInPage from '@material-ui/icons/FindInPage'
 import IconNoteAdd from '@material-ui/icons/NoteAdd'
 import React from 'react'
-import {withRouter} from 'react-router-dom'
+import withRouter from 'react-router-dom/withRouter'
 
 export default withRouter(class extends React.Component {
   constructor () {

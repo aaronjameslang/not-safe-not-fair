@@ -5,7 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import React from 'react'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
-import { withStyles } from 'material-ui/styles'
+import withStyles from 'material-ui/styles/withStyles'
 
 export default withStyles({
   flat: {

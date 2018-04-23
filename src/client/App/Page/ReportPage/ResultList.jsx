@@ -1,57 +1,49 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
-import withTheme from 'material-ui/styles/withTheme'
+import classnames from 'classnames'
+import withStyles from 'material-ui/styles/withStyles'
 
-export default class ResultList extends React.Component {
-  get className () {
-    return [
-      'result-list',
-      this.props.className,
-      this.props.results ? 'loading' : null
-    ].join(' ')
-  }
-  render () {
-    return (
-      <Divx className={this.className}>
-        <List results={this.props.results || []} Result={this.props.Result} />
-        <Count results={this.props.results} />
-      </Divx>
-    )
-  }
-}
+export default ({results, Result}) => (
+  <div>
+    <List results={results || []} Result={Result} />
+    <Count results={results} />
+  </div>
+)
 
-const Divx = withTheme()(styled.div`
-  > ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    li:nth-child(even) {
-      background-color: ${props => props.theme.palette.primary.tint};
+const List = withStyles(theme => ({
+  list: {
+    listStyle: 'none',
+    margin: 0,
+    padding: 0,
+    '& > li:nth-child(even)': {
+      backgroundColor: theme.palette.primary.tint
     }
- }
-`)
-
-const List = ({results, Result}) =>
-  <ul>{results.map(ListItem(Result))}</ul>
+  }
+}))(({classes, results, Result}) =>
+  <ul className={classes.list}>{results.map(ListItem(Result))}</ul>
+)
 const ListItem = Result => result =>
   <li key={result.id}><Result {...result} /></li>
 
-const Count = ({results}) => (
-  <Ellipsising className='count' disabled={!!results}>
-    {results ? results.length : 'Loading'} results
-  </Ellipsising>
-)
-const Ellipsising = styled.div`
-  padding: 1em;
-  text-align: center;
-
-  &:after {
-    animation: ${keyframes`to { width: 1.25em; }`} steps(100, end) 1s infinite;
-    content: "\\2026";
-    display: ${({disabled}) => disabled ? 'none' : 'inline-block'};
-    overflow: hidden;
-    vertical-align: bottom;
-    width: 0;
+const Count = withStyles({
+  count: {
+    padding: '1em',
+    textAlign: 'center'
+  },
+  '@keyframes hellip': {
+    from: { width: 0 },
+    to: { width: '1.25em' }
+  },
+  hellip: {
+    '&::after': {
+      animation: 'hellip steps(100, end) 1s infinite',
+      content: '"\\2026"',
+      display: 'inline-block',
+      overflow: 'hidden',
+      verticalAlign: 'bottom'
+    }
   }
-`
+})(({classes, results}) => (
+  <div className={classnames(classes.count, {[classes.hellip]: !results})} >
+    {results ? results.length : 'Loading'} results
+  </div>
+))

@@ -1,11 +1,11 @@
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import ClearIcon from '@material-ui/icons/Clear'
+import MenuItem from 'material-ui/Menu/MenuItem'
 import React from 'react'
 import Typography from 'material-ui/Typography'
+import withStyles from 'material-ui/styles/withStyles'
 import { Async } from 'react-select'
-import { MenuItem } from 'material-ui/Menu'
-import { withStyles } from 'material-ui/styles'
 
 class Option extends React.Component {
   render () {

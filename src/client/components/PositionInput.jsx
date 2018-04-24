@@ -1,7 +1,7 @@
 import Button from 'material-ui/Button'
+import CircularProgress from 'material-ui/Progress/CircularProgress'
 import MyLocationIcon from '@material-ui/icons/MyLocation'
 import React from 'react'
-import { CircularProgress } from 'material-ui/Progress'
 
 export default class extends React.Component {
   constructor () {

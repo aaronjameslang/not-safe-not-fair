@@ -1,34 +1,38 @@
 import Button from 'material-ui/Button'
-import Input, { InputLabel } from 'material-ui/Input'
+import FormControl from 'material-ui/Form/FormControl'
+import Input from 'material-ui/Input'
+import InputLabel from 'material-ui/Input/InputLabel'
+import MenuItem from 'material-ui/Menu/MenuItem'
 import React from 'react'
 import Select from 'material-ui/Select'
 import TextField from 'material-ui/TextField'
-import styled from 'styled-components'
-import { FormControl } from 'material-ui/Form'
-import { MenuItem } from 'material-ui/Menu'
-import { find, propEq } from 'ramda'
+import find from 'ramda/es/find'
+import propEq from 'ramda/es/propEq'
+import withStyles from 'material-ui/styles/withStyles'
 
 import { getLocations, getReportReasons } from '../../services/api'
 import AutoComplete from '../../components/AutoComplete'
 
-export default class extends React.Component {
+export default withStyles({
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '1em'
+  }
+})(class extends React.Component {
   render () {
+    const {classes} = this.props
     return (
-      <$form>
+      <form className={classes.form}>
         <ReasonSelect onChange={reason => this.setState({reason})} />
         <LocationInput onChange={locationCode => this.setState({locationCode})} />
         <TextField />
         <Button variant='raised' color='primary'>Cancel</Button>
         <Button variant='raised' color='primary'>Report</Button>
-      </$form>
+      </form>
     )
   }
-}
-const $form = styled.form`
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-`
+})
 
 class ReasonSelect extends React.Component {
   constructor () {

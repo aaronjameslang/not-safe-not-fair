@@ -1,8 +1,8 @@
 import CssBaseline from 'material-ui/CssBaseline'
+import HashRouter from 'react-router-dom/HashRouter'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import React from 'react'
-import { HashRouter as Router } from 'react-router-dom'
-import { withStyles } from 'material-ui'
+import withStyles from 'material-ui/styles/withStyles'
 
 import Footer from './Footer'
 import Header from './Header'
@@ -18,12 +18,12 @@ export default withStyles({
 })(({classes}) => (
   <div className={'app ' + classes.app}>
     <CssBaseline />
-    <Router>
+    <HashRouter>
       <MuiThemeProvider theme={theme}>
         <Header />
         <Page />
         <Footer />
       </MuiThemeProvider>
-    </Router>
+    </HashRouter>
   </div>
 ))

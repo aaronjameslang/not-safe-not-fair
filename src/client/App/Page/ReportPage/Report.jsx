@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'material-ui/Typography'
 import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 import withStyles from 'material-ui/styles/withStyles'
 
@@ -24,19 +25,18 @@ export default withStyles({
   </div>
 ))
 
-const Ago = ({timestamp}) => <div title={timestamp}>{timeAgo(timestamp)}</div>
+const Ago = ({timestamp}) => <T title={timestamp}>{timeAgo(timestamp)}</T>
 const timeAgo = timestamp => distanceInWordsStrict(Date.now(), new Date(timestamp), {addSuffix: true})
 const Location = withStyles({
   location: { textTransform: 'capitalize' }
 })(
-  ({classes, location}) => <div className={classes.location}>{location.toLowerCase()}</div>
+  ({classes, location}) => <T className={classes.location}>{location.toLowerCase()}</T>
 )
-const Reasons = ({reasons}) => <ul>reasons</ul>
+const Reasons = ({reasons}) => <ul><T>Just because</T></ul>
 // const Reason = reason => <li key={reason}>{reason}</li>
 
 const Comment = withStyles(theme => ({
   bq: {
-    margin: 0,
     '&::before': {
       color: theme.palette.primary.main,
       content: '"\\201C"',
@@ -46,5 +46,5 @@ const Comment = withStyles(theme => ({
     }
   }
 }))(
-  ({classes, comment}) => <blockquote className={classes.bq}>{comment}</blockquote>
+  ({classes, comment}) => <T component='blockquote' className={classes.bq}>{comment}</T>
 )

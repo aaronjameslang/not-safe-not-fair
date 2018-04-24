@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'material-ui/Typography'
 import classnames from 'classnames'
 import withStyles from 'material-ui/styles/withStyles'
 
@@ -43,7 +44,7 @@ const Count = withStyles({
     }
   }
 })(({classes, results}) => (
-  <div className={classnames(classes.count, {[classes.hellip]: !results})} >
+  <T className={classnames(classes.count, {[classes.hellip]: !results})} >
     {results ? results.length : 'Loading'} results
-  </div>
+  </T>
 ))

@@ -1,6 +1,7 @@
 /.cache-loader
 /.env.json
 /configuration/*.csv
+/configuration/*.json
 /configuration/*.pdf
 /configuration/*.sql
 /configuration/*.zip

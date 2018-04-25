@@ -1,4 +1,5 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
 const app = express()
 
 const { Pool } = require('pg')
@@ -22,6 +23,23 @@ app.get('/report', (req, res) => {
 app.post('/report', (req, res) => {
   console.log(req.body)
   res.end()
+})
+
+app.get('/user', (req, res) => {
+  const token = req.header('authorization').split(' ').pop()
+  const key = require('../../jwks').keys[0].pem
+  const decoded = jwt.decode(token, key)
+  const id = '#' + decoded.email
+  jwt.verify(token, key, {algorithms: ['RS256']}, (error, verified) => {
+    res.json({
+      id,
+      token,
+      key,
+      error,
+      decoded,
+      verified
+    })
+  })
 })
 
 app.get('/report/reason', (req, res) => { // : void

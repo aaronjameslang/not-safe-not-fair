@@ -6,6 +6,7 @@ import withStyles from 'material-ui/styles/withStyles'
 import HomePage from './HomePage'
 import ReportNewPage from './ReportNewPage'
 import ReportPage from './ReportPage'
+import UserPage from './UserPage'
 
 export default withStyles({
   page: {
@@ -17,6 +18,7 @@ export default withStyles({
 })(({classes}) => (
   <div className={'page ' + classes.page}>
     <Switch>
+      <Route path='/user' component={UserPage} />
       <Route path='/report/new' component={ReportNewPage} />
       <Route path='/report/:id?' component={ReportPage} />
       <Route component={HomePage} />

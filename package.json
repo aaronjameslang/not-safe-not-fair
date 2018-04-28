@@ -63,6 +63,7 @@
     "react-router-dom": "^4.2.2",
     "react-select": "^1.2.1",
     "uglifyjs-webpack-plugin": "^1.2.4",
+    "uuid": "^3.2.1",
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.10.0"
   }

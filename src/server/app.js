@@ -5,6 +5,8 @@ const app = express()
 const { Pool } = require('pg')
 const pool = new Pool()
 
+import calcUserId from './calcUserId'
+
 app.use(express.static('static'))
 app.use(express.json())
 
@@ -29,7 +31,7 @@ app.get('/user', (req, res) => {
   const token = req.header('authorization').split(' ').pop()
   const key = require('../../jwks').keys[0].pem
   const decoded = jwt.decode(token, key)
-  const id = '#' + decoded.email
+  const id = calcUserId(decoded.email)
   jwt.verify(token, key, {algorithms: ['RS256']}, (error, verified) => {
     res.json({
       id,

@@ -1,11 +1,11 @@
 const express = require('express')
-const jwt = require('jsonwebtoken')
 const app = express()
 
 const { Pool } = require('pg')
 const pool = new Pool()
 
-import calcUserId from './calcUserId'
+import calcUserId from './services/calcUserId'
+import getUserEmail from './services/getUserEmail'
 
 app.use(express.static('static'))
 app.use(express.json())
@@ -28,18 +28,14 @@ app.post('/report', (req, res) => {
 })
 
 app.get('/user', (req, res) => {
-  const token = req.header('authorization').split(' ').pop()
-  const key = require('../../jwks').keys[0].pem
-  const decoded = jwt.decode(token, key)
-  const id = calcUserId(decoded.email)
-  jwt.verify(token, key, {algorithms: ['RS256']}, (error, verified) => {
+  getUserEmail(req, (error, email) => {
+    if (error) {
+      res.status(401).json(error)
+      return
+    }
     res.json({
-      id,
-      token,
-      key,
-      error,
-      decoded,
-      verified
+      email,
+      id: calcUserId(email)
     })
   })
 })

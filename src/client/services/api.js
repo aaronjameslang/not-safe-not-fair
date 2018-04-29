@@ -1,9 +1,15 @@
-/* global fetch:false */
+/* global fetch */
+import { getToken } from './auth'
 
-const get = ([prefix], id) =>
-  fetch(prefix + (id || '')).then(res => res.json())
+const get = ([prefix], id, init = {}) =>
+  fetch(prefix + (id || ''), init).then(res => res.json())
+
+const getSecure = ([prefix], id) =>
+  get([prefix], id, {
+    headers: { Authorization: 'Bearer ' + getToken() }
+  })
 
 export const getLocations = name => get`/location?name=${name}`
-export const getReport = id => get`/report/{id}`
 export const getReportReasons = () => get`/report/reason`
-export const getReports = id => get`/report`
+export const getReports = () => get`/report`
+export const getUser = () => getSecure`/user`

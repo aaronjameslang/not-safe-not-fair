@@ -1,4 +1,4 @@
-default: location.sql outcode.sql
+default: location.sql outcode.sql jwks
 
 location.sql: etrust.sql epraccur.sql scotorg.sql
 	cat $^ > $@
@@ -25,3 +25,8 @@ scotorg.csv:
 	tar -xf scotorg.zip
 scotorg.sql: scotorg.csv scotorg.js
 	node scotorg.js
+
+jwks.json:
+	curl https://notsafenotfair.eu.auth0.com/.well-known/jwks.json -O
+jwks: jwks.json
+	node jwks.js

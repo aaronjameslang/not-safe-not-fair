@@ -1,7 +1,10 @@
-const express = require('express')
-const app = express()
+import express from 'express'
+import { Pool } from 'pg'
 
-const { Pool } = require('pg')
+import calcUserId from './services/calcUserId'
+import getUserEmail from './services/getUserEmail'
+
+const app = express()
 const pool = new Pool()
 
 app.use(express.static('static'))
@@ -22,6 +25,19 @@ app.get('/report', (req, res) => {
 app.post('/report', (req, res) => {
   console.log(req.body)
   res.end()
+})
+
+app.get('/user', (req, res) => {
+  getUserEmail(req, (error, email) => {
+    if (error) {
+      res.status(401).json(error)
+      return
+    }
+    res.json({
+      email,
+      id: calcUserId(email)
+    })
+  })
 })
 
 app.get('/report/reason', (req, res) => { // : void

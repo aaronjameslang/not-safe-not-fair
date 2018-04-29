@@ -1,4 +1,4 @@
-/* global fetch:false */
+/* global fetch */
 import { getToken } from './auth'
 
 const get = ([prefix], id, init = {}) =>
@@ -6,9 +6,7 @@ const get = ([prefix], id, init = {}) =>
 
 const getSecure = ([prefix], id) =>
   get([prefix], id, {
-    headers: new Headers({
-      Authorization: 'Bearer ' + getToken()
-    })
+    headers: { Authorization: 'Bearer ' + getToken() }
   })
 
 export const getLocations = name => get`/location?name=${name}`

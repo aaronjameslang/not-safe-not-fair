@@ -1,11 +1,11 @@
-const express = require('express')
-const app = express()
-
-const { Pool } = require('pg')
-const pool = new Pool()
+import express from 'express'
+import { Pool } from 'pg'
 
 import calcUserId from './services/calcUserId'
 import getUserEmail from './services/getUserEmail'
+
+const app = express()
+const pool = new Pool()
 
 app.use(express.static('static'))
 app.use(express.json())

@@ -1,9 +1,11 @@
+/* global window */
+
 import { Auth0LockPasswordless } from 'auth0-lock'
 import theme from './theme'
 
 const lock = new Auth0LockPasswordless('P4VNlmrVpFkOTfi2xM7tNoED9V9o2CAv', 'notsafenotfair.eu.auth0.com', {
   auth: {
-    redirectUrl: location.origin,
+    redirectUrl: window.location.origin,
     responseType: 'token id_token'
   },
   passwordlessMethod: 'link',
@@ -13,9 +15,9 @@ const lock = new Auth0LockPasswordless('P4VNlmrVpFkOTfi2xM7tNoED9V9o2CAv', 'nots
 })
 
 lock.on('authenticated', function ({idToken}) {
-  localStorage.setItem('token', idToken);
+  window.localStorage.setItem('token', idToken)
 })
 
 export default ::lock.show
 
-export const getToken = () => localStorage.getItem('token');
+export const getToken = () => window.localStorage.getItem('token')

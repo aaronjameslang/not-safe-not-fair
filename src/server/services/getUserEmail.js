@@ -1,9 +1,11 @@
 const jwt = require('jsonwebtoken')
 
+class NoTokenError extends Error {}
+
 export default (req, cb) => {
   const header = req.header('authorization')
   if (!header) {
-    cb({name: 'NoTokenError', message: 'missing auth token'})
+    cb(new NoTokenError())
     return
   }
   const token = header.split(' ').pop()

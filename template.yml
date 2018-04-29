@@ -5,6 +5,7 @@ Resources:
       CodeUri: ./deploy
       Handler: index.handler
       Runtime: nodejs6.10
+      Timeout: 10
       Environment:
         Variables:
           PGHOST: 'see ./.env*'

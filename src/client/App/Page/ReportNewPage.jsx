@@ -10,14 +10,21 @@ import find from 'ramda/es/find'
 import propEq from 'ramda/es/propEq'
 import withStyles from 'material-ui/styles/withStyles'
 
-import { getLocations, getReportReasons } from '../../services/api'
 import AutoComplete from '../../components/AutoComplete'
+import {
+  getLocations,
+  getReportReasons,
+  postReport
+} from '../../services/api'
 
 export default withStyles({
   form: {
     display: 'flex',
     flexDirection: 'column',
-    padding: '1em'
+    padding: '1em',
+    '& > *': {
+      padding: '1em'
+    }
   }
 })(class extends React.Component {
   render () {
@@ -26,13 +33,29 @@ export default withStyles({
       <form className={classes.form}>
         <ReasonSelect onChange={reason => this.setState({reason})} />
         <LocationInput onChange={locationCode => this.setState({locationCode})} />
-        <TextField />
-        <Button variant='raised' color='primary'>Cancel</Button>
-        <Button variant='raised' color='primary'>Report</Button>
+        <TextField
+          label='Comment'
+          onChange={event => { this.setState({comment: event.target.value}) }}
+          multiline
+        />
+        <ButtonRow onCancel={() => window.history.back()} onSubmit={() => postReport(this.state)} />
       </form>
     )
   }
 })
+
+const ButtonRow = withStyles({
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  }
+})(({classes, onCancel, onSubmit}) => (
+  <div className={classes.row}>
+    <Button variant='flat' color='primary' onClick={onCancel}>Cancel</Button>
+    <Button variant='raised' color='primary' onClick={onSubmit}>Report</Button>
+  </div>
+))
 
 class ReasonSelect extends React.Component {
   constructor () {

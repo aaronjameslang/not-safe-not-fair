@@ -3,6 +3,7 @@ import { Pool } from 'pg'
 
 import calcUserId from './services/calcUserId'
 import getUserEmail from './services/getUserEmail'
+import getUserId from './services/getUserId'
 
 const app = express()
 const pool = new Pool()
@@ -18,13 +19,31 @@ app.get('/report', (req, res) => {
       FROM report
       JOIN configuration.location AS l
         ON report.location_code = l.code
+     ORDER BY report.ctime DESC
      LIMIT 1000
   `).then(rowsToJson(res))
 })
 
 app.post('/report', (req, res) => {
-  console.log(req.body)
-  res.end()
+  const emailAddress = getUserEmail(req)
+  const userId = calcUserId(emailAddress)
+  pool.query(`
+    INSERT INTO "user" (id, email_address)
+         VALUES ($1, $2)
+    ON CONFLICT DO NOTHING
+  `, [
+    userId,
+    emailAddress
+  ]).then(() =>
+    pool.query(`
+      INSERT INTO report (user_id, location_code, comment)
+           VALUES ($1, $2, $3)
+    `, [
+      userId,
+      req.body.locationCode,
+      req.body.comment
+    ])
+  ).then(::res.json)
 })
 
 app.get('/user', (req, res) => {
@@ -60,7 +79,7 @@ app.get('/outcode', (req, res) => {
 app.get('/location', (req, res) => {
   const { name } = req.query
   const sql = `
-    SELECT *
+    SELECT *, l.code
       FROM configuration.location AS l
       JOIN configuration.outcode  AS o
         ON l.outcode = o.code

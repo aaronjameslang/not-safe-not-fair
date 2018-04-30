@@ -2,18 +2,17 @@ const jwt = require('jsonwebtoken')
 
 class NoTokenError extends Error {}
 
-export default (req, cb) => {
+export default req => {
   const header = req.header('authorization')
   if (!header) {
-    cb(new NoTokenError())
-    return
+    throw new NoTokenError()
   }
   const token = header.split(' ').pop()
   const key = require('../../../jwks').keys[0].pem
-  jwt.verify(
+  const verified = jwt.verify(
     token,
     key,
-    {algorithms: ['RS256']},
-    (error, verified) => cb(error, verified && verified.email)
+    {algorithms: ['RS256']}
   )
+  return verified.email
 }

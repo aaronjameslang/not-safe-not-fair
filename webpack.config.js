@@ -1,18 +1,11 @@
-const path = require('path')
-const { spawnSync } = require('child_process')
-const webpack = require('webpack')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-
-const {
-  DEBUG
-} = process.env
+const path = require('path')
+const webpack = require('webpack')
+const { spawnSync } = require('child_process')
 
 const commonPlugins = [
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || DEBUG ? 'debug' : 'production'),
     notsafenotfair: {
       build: {
         commithash: '"' + spawnSync('git', ['rev-parse', 'HEAD']).stdout.toString().slice(0, -1) + '"',
@@ -23,20 +16,6 @@ const commonPlugins = [
   })
 ]
 
-if (!DEBUG) {
-  commonPlugins.push(new UglifyJsPlugin())
-}
-
-if (process.env.ANALYSE) {
-  commonPlugins.push(
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      generateStatsFile: true,
-      openAnalyzer: false
-    })
-  )
-}
-
 const clientConfig = {
   entry: './src/client/index.js',
   output: {
@@ -46,7 +25,6 @@ const clientConfig = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  devtool: DEBUG ? 'source-map' : undefined,
   module: {
     rules: [
       {
@@ -61,9 +39,9 @@ const clientConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Not Safe Not Fair',
-      filename: 'index.html',
-      inlineSource: '.'
+      inlineSource: '.',
+      meta: {viewport: 'width=device-width, initial-scale=1'},
+      title: 'Not Safe Not Fair'
     }),
     new HtmlWebpackInlineSourcePlugin()
   ].concat(commonPlugins),

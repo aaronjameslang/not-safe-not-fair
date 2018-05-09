@@ -3,7 +3,6 @@ import { Pool } from 'pg'
 
 import calcUserId from './services/calcUserId'
 import getUserEmail from './services/getUserEmail'
-import getUserId from './services/getUserId'
 
 const app = express()
 const pool = new Pool()

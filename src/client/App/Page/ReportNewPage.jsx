@@ -52,8 +52,8 @@ const ButtonRow = withStyles({
   }
 })(({classes, onCancel, onSubmit}) => (
   <div className={classes.row}>
-    <Button variant='flat' color='primary' onClick={onCancel}>Cancel</Button>
-    <Button variant='raised' color='primary' onClick={onSubmit}>Report</Button>
+    <Button size='large' color='primary' onClick={onCancel} variant='flat'>Cancel</Button>
+    <Button size='large' color='primary' onClick={onSubmit} variant='raised'>Report</Button>
   </div>
 ))
 

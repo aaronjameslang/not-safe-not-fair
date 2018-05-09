@@ -39,9 +39,9 @@ const clientConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Not Safe Not Fair',
-      filename: 'index.html',
-      inlineSource: '.'
+      inlineSource: '.',
+      meta: {viewport: 'width=device-width, initial-scale=1'},
+      title: 'Not Safe Not Fair'
     }),
     new HtmlWebpackInlineSourcePlugin()
   ].concat(commonPlugins),

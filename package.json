@@ -13,7 +13,7 @@
     "psql": "docker run -it --rm --network=notsafenotfair_default --env-file .env --mount type=bind,src=$PWD,dst=/nsnf -w /nsnf postgres:9.6-alpine psql",
     "sam": "node_modules/aws-sam-local/node_modules/.bin/sam",
     "start": "npm run start:db && npm run start:api & npm run webpack:dev",
-    "start:api": "node .env.js && npm run sam local start-api --docker-network=notsafenotfair_default --env-vars .env.json",
+    "start:api": "node .env.js && npm run sam -- local start-api --docker-network=notsafenotfair_default --env-vars .env.json",
     "start:db": "docker-compose up -d",
     "stats": "npm run stats:client & npm run stats:server",
     "stats:client": "webpack --config webpack.config.client.js --profile --json > stats.client.json",

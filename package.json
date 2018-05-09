@@ -9,7 +9,7 @@
     "dbdrop": "npm run psql -- --dbname postgres -c 'DROP   DATABASE notsafenotfair'",
     "dbmc": "db-migrate create",
     "dbmu": "docker run -it --rm --network=notsafenotfair_default --env-file .env --mount type=bind,src=$PWD,dst=/nsnf -w /nsnf node npm run db-migrate up:all",
-    "posttest": "eslint --fix --ext .js,.jsx . && git diff --exit-code && npm run webpack:prod",
+    "posttest": "eslint --fix --ext .js,.jsx . && git diff --exit-code --text && npm run webpack:prod",
     "psql": "docker run -it --rm --network=notsafenotfair_default --env-file .env --mount type=bind,src=$PWD,dst=/nsnf -w /nsnf postgres:9.6-alpine psql",
     "sam": "node_modules/aws-sam-local/node_modules/.bin/sam",
     "start": "npm run start:db && npm run start:api & npm run webpack:dev",

@@ -16,7 +16,7 @@ export default withStyles({
     overflow: 'auto'
   }
 })(({classes}) => (
-  <div className={'page ' + classes.page}>
+  <div className={classes.page}>
     <Switch>
       <Route path='/user' component={UserPage} />
       <Route path='/report/new' component={ReportNewPage} />

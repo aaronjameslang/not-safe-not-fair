@@ -6,7 +6,6 @@ import MenuIcon from '@material-ui/icons/Menu'
 import React from 'react'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
-import auth from '../services/auth'
 import withStyles from 'material-ui/styles/withStyles'
 
 export default withStyles({
@@ -26,7 +25,7 @@ export default withStyles({
         Not Safe Not Fair
         </Typography>
       </Link>
-      <IconButton onClick={auth}>
+      <IconButton component={Link} to='/user'>
         <AccountCircle />
       </IconButton>
     </Toolbar>

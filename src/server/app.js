@@ -46,15 +46,10 @@ app.post('/report', (req, res) => {
 })
 
 app.get('/user', (req, res) => {
-  getUserEmail(req, (error, email) => {
-    if (error) {
-      res.status(401).json(error)
-      return
-    }
-    res.json({
-      email,
-      id: calcUserId(email)
-    })
+  const email = getUserEmail(req)
+  res.json({
+    email,
+    id: calcUserId(email)
   })
 })
 

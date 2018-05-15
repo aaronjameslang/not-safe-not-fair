@@ -1,16 +1,18 @@
+import auth from './services/auth'
 import express from 'express'
-import { Pool } from 'pg'
-
-import calcUserId from './services/calcUserId'
-import getUserEmail from './services/getUserEmail'
+import pool from './repo/pool'
 
 const app = express()
-const pool = new Pool()
 
 app.use(express.static('static'))
 app.use(express.json())
 
 const rowsToJson = res => ({rows}) => res.json(rows)
+
+const onError = response => error => {
+  console.log(error)
+  response.status(error.httpStatusCode || 500).end()
+}
 
 app.get('/report', (req, res) => {
   pool.query(`
@@ -24,33 +26,33 @@ app.get('/report', (req, res) => {
 })
 
 app.post('/report', (req, res) => {
-  const emailAddress = getUserEmail(req)
-  const userId = calcUserId(emailAddress)
-  pool.query(`
-    INSERT INTO "user" (id, email_address)
-         VALUES ($1, $2)
-    ON CONFLICT DO NOTHING
-  `, [
-    userId,
-    emailAddress
-  ]).then(() =>
-    pool.query(`
-      INSERT INTO report (user_id, location_code, comment)
-           VALUES ($1, $2, $3)
-    `, [
-      userId,
-      req.body.locationCode,
-      req.body.comment
-    ])
-  ).then(::res.json)
+  let userId
+  auth(req)
+    .then(user => {
+      userId = user.id
+      return pool.query(`
+        INSERT INTO "user" (id, email_address)
+        VALUES ($1, $2)
+        ON CONFLICT DO NOTHING
+      `, [
+        user.id,
+        user.emailAddress
+      ])
+    })
+    .then(() =>
+      pool.query(`
+        INSERT INTO report (user_id, location_code, comment)
+        VALUES ($1, $2, $3)
+      `, [
+        userId,
+        req.body.locationCode,
+        req.body.comment
+      ])
+    ).then(::res.json)
 })
 
 app.get('/user', (req, res) => {
-  const email = getUserEmail(req)
-  res.json({
-    email,
-    id: calcUserId(email)
-  })
+  return auth(req).then(::res.json).catch(onError)
 })
 
 app.get('/report/reason', (req, res) => { // : void
@@ -83,5 +85,7 @@ app.get('/location', (req, res) => {
   `
   pool.query(sql, [`%${name.toUpperCase()}%`]).then(rowsToJson(res))
 })
+
+app.use((err, req, res, nxt) => onError(res)(err))
 
 module.exports = app

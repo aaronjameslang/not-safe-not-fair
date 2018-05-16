@@ -9,12 +9,11 @@ const NAMESPACE = 'F975FC06-AE71-4780-AF97-3CC393CA5C97'
 const calcUserId = emailAddress =>
   uuidv5(emailAddress.toLowerCase(), NAMESPACE)
 
-export const authenticate = req => {
-  const header = req.header('authorization')
-  if (!header) {
+export const authenticate = ({ authorization }) => {
+  if (!authorization) {
     throw new Error(401)
   }
-  const token = header.split(' ').pop()
+  const token = authorization.split(' ').pop()
   const key = require('../../../jwks').keys[0].pem
   const verified = jwt.verify(
     token,
@@ -37,8 +36,8 @@ export const authorise = emailAddress => {
     })
 }
 
-export default request => {
-  const user = authenticate(request)
+export default headers => {
+  const user = authenticate(headers)
   return authorise(user.emailAddress)
     .then(() => user)
 }

@@ -1,4 +1,6 @@
-const awsServerlessExpress = require('aws-serverless-express')
-const app = require('./app')
-const server = awsServerlessExpress.createServer(app)
-exports.handler = (event, context) => awsServerlessExpress.proxy(server, event, context)
+import ApiBuilder from 'claudia-api-builder'
+import route from './route'
+
+const api = new ApiBuilder({requestFormat: 'AWS_PROXY'})
+route(api)
+exports.handler = api.proxyRouter

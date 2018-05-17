@@ -6,5 +6,6 @@
 /configuration/*.sql
 /configuration/*.zip
 /deploy
+/dump.psql
 /node_modules
 /stats.*.json

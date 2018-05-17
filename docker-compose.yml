@@ -1,4 +1,7 @@
-version: '3'
+version: '3.5'
+networks:
+  default:
+    name: netsafenetfair
 services:
   db:
     image: postgres:9.6-alpine

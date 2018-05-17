@@ -1,6 +1,6 @@
 import pool from './pool'
 
-export const insert = ({ userId, locationCode, comment, reasons}) =>
+export const insert = ({ userId, locationCode, comment }) =>
   pool.query(`
     INSERT INTO report (user_id, location_code, comment)
     VALUES ($1, $2, $3)

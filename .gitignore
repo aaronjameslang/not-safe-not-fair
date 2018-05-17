@@ -7,5 +7,6 @@
 /configuration/*.zip
 /dist
 /dump.psql
+/migrations/log
 /node_modules
 /stats.*.json

@@ -8,7 +8,7 @@
     "dbdrop": "npm run psql -- --dbname postgres -c 'DROP   DATABASE notsafenotfair'",
     "dbdump": "npm run pg_dump > dump.psql",
     "dbmc": "db-migrate create",
-    "dbmu": "npm run docker -- node npx db-migrate up:all",
+    "dbmu": "npm run docker -- node npx db-migrate up:all > migrations/log",
     "docker": "docker run -it --rm --network=netsafenetfair --env-file .env --mount type=bind,src=$PWD,dst=/nsnf -w /nsnf",
     "install:dev": "pip install --user aws-sam-cli",
     "pg_dump": "npm run docker -- postgres:9.6-alpine pg_dump",

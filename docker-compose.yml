@@ -4,7 +4,5 @@ networks:
     name: netsafenetfair
 services:
   db:
+    env_file: .env
     image: postgres:9.6-alpine
-    environment:
-      POSTGRES_PASSWORD: "${PGPASSWORD}"
-      POSTGRES_USER: "${PGUSER}"

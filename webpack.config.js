@@ -19,8 +19,7 @@ const commonPlugins = [
 const clientConfig = {
   entry: './src/client/index.js',
   output: {
-    path: path.resolve(__dirname, 'deploy', 'static'),
-    filename: 'bundle.js'
+    filename: 'client.js'
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -54,7 +53,6 @@ const clientConfig = {
 const serverConfig = {
   entry: './src/server/index.js',
   output: {
-    path: path.resolve(__dirname, 'deploy'),
     filename: 'index.js',
     libraryTarget: 'commonjs2'
   },

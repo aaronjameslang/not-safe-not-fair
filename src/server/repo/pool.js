@@ -1,2 +1,4 @@
 import { Pool } from 'pg'
-export default new Pool()
+const pool = Object.create(new Pool())
+pool.rows = (...args) => pool.query(...args).then(x => x.rows)
+export default pool

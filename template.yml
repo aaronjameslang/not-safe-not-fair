@@ -2,12 +2,13 @@ Resources:
   notsafenotfair:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./deploy
+      CodeUri: ./dist
       Handler: index.handler
       Runtime: nodejs6.10
       Timeout: 10
       Environment:
         Variables:
+          HTML_URL: 'see ./.env*'
           PGHOST: 'see ./.env*'
           PGPASSWORD: 'see ./.env*'
           PGUSER: 'see ./.env*'

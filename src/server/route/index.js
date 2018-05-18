@@ -9,7 +9,7 @@ export default api => {
   user(api)
 
   api.get('/',
-    () => fs.readFileSync('./static/index.html', 'utf8'), // TODO sync?
+    () => fs.readFileSync(process.env.HTML_URL, 'utf8'), // TODO sync?
     { success: { contentType: 'text/html' } }
   )
 }

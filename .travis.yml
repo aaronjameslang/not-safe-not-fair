@@ -16,7 +16,7 @@ deploy:
 - provider: lambda
   region: eu-west-2
   function_name: not-safe-not-fair
-  zip: deploy
+  zip: dist
   handler_name: handler
   runtime: nodejs6.10
   role: arn:aws:iam::268897920616:role/lambda_basic_execution

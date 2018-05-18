@@ -5,7 +5,7 @@
 /configuration/*.pdf
 /configuration/*.sql
 /configuration/*.zip
-/deploy
+/dist
 /dump.psql
 /node_modules
 /stats.*.json

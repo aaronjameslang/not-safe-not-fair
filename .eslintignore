@@ -1,2 +1,2 @@
-deploy
+dist
 migrations/**/*.js

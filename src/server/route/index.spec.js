@@ -36,6 +36,6 @@ describe(__filename, () => {
       },
       lambdaPath: 'src/server/index',
       timeoutMs: 30000
-    }).then(snapshot)
+    }).then(r => snapshot({ ...r, body: JSON.parse(r.body) }))
   )
 })

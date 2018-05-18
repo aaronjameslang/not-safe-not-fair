@@ -10,6 +10,7 @@
     "dbmc": "db-migrate create",
     "dbmu": "npm run docker -- node npx db-migrate up:all",
     "docker": "docker run -it --rm --network=netsafenetfair --env-file .env --mount type=bind,src=$PWD,dst=/nsnf -w /nsnf",
+    "install:dev": "pip install --user aws-sam-cli",
     "pg_dump": "npm run docker -- postgres:9.6-alpine pg_dump",
     "postinstall": "node ./.env.js",
     "posttest": "eslint --fix --ext .js,.jsx . && git diff --exit-code --text && npm run webpack:prod",
@@ -34,7 +35,6 @@
   "dependencies": {
     "@material-ui/icons": "^1.0.0-beta.42",
     "auth0-lock": "^11.6.1",
-    "aws-sam-local": "^0.2.11",
     "aws-serverless-express": "^3.2.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",

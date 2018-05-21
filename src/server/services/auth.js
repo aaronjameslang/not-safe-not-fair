@@ -11,7 +11,7 @@ const calcUserId = emailAddress =>
 
 export const authenticate = ({ authorization }) => {
   if (!authorization) {
-    throw new Error(401)
+    throw new Error(401, 'No authorization')
   }
   const token = authorization.split(' ').pop()
   const key = require('../../../jwks').keys[0].pem
@@ -37,7 +37,11 @@ export const authorise = emailAddress => {
 }
 
 export default headers => {
-  const user = authenticate(headers)
-  return authorise(user.emailAddress)
-    .then(() => user)
+  try {
+    const user = authenticate(headers)
+    return authorise(user.emailAddress)
+      .then(() => user)
+  } catch (error) {
+    return Promise.reject(error)
+  }
 }

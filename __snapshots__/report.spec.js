@@ -1,4 +1,4 @@
-exports['/nsnf/src/server/route/index.spec.js GET /report 1'] = {
+exports['/nsnf/src/server/route/report.spec.js GET /report 1'] = {
   'statusCode': 200,
   'headers': {
     'Content-Type': 'application/json',
@@ -101,4 +101,17 @@ exports['/nsnf/src/server/route/index.spec.js GET /report 1'] = {
       'location_name': 'HULL ROYAL INFIRMARY'
     }
   ]
+}
+
+exports['/nsnf/src/server/route/report.spec.js POST /report 401 1'] = {
+  'statusCode': 401,
+  'headers': {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token',
+    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Max-Age': '0'
+  },
+  'body': 'No authorization'
 }

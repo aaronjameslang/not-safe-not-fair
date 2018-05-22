@@ -3,9 +3,8 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "dbclean": "npm run dbdrop && npm run dbcreate && npm run dbmu",
-    "dbcreate": "npm run psql -- --dbname postgres -c 'CREATE DATABASE notsafenotfair'",
-    "dbdrop": "npm run psql -- --dbname postgres -c 'DROP   DATABASE notsafenotfair'",
+    "dbclean": "npm run dbrecreate && npm run dbmu",
+    "dbrecreate": "npm run psql -- --dbname postgres -c 'DROP DATABASE notsafenotfair' -c 'CREATE DATABASE notsafenotfair'",
     "dbdump": "npm run pg_dump > dump.psql",
     "dbmc": "db-migrate create",
     "dbmu": "npm run docker -- node npx db-migrate up:all > migrations/log",

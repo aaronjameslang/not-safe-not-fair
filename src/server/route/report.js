@@ -4,7 +4,7 @@ import * as user from '../repo/user'
 
 const errorHandler = api => error => {
   console.log(error)
-  return new api.ApiResponse(error.message, {}, error.httpStatusCode)
+  return new api.ApiResponse(error.message, {}, error.httpStatusCode || 500)
 }
 
 export default api => {

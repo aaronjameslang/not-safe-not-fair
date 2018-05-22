@@ -4,6 +4,20 @@ import emailIsNhs from '../../common/emailIsNhs'
 import jwt from 'jsonwebtoken'
 import uuidv5 from 'uuid/v5'
 
+const verify = token => {
+  const key = require('../../../jwks').keys[0].pem
+  try {
+    return jwt.verify(
+      token,
+      key,
+      {algorithms: ['RS256']}
+    )
+  } catch (error) {
+    error.httpStatusCode = 401
+    throw error
+  }
+}
+
 const NAMESPACE = 'F975FC06-AE71-4780-AF97-3CC393CA5C97'
 
 const calcUserId = emailAddress =>
@@ -14,12 +28,7 @@ export const authenticate = ({ authorization }) => {
     throw new Error(401, 'No authorization')
   }
   const token = authorization.split(' ').pop()
-  const key = require('../../../jwks').keys[0].pem
-  const verified = jwt.verify(
-    token,
-    key,
-    {algorithms: ['RS256']}
-  )
+  const verified = verify(token)
   return {
     emailAddress: verified.email,
     id: calcUserId(verified.email)

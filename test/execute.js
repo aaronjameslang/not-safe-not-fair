@@ -1,12 +1,12 @@
 import { execute } from 'lambda-local'
 
-export default (httpMethod, resourcePath) =>
+export default (httpMethod, resourcePath, headers = {}) =>
   execute({
     environment: {
       HTML_URL: 'dist/index.html'
     },
     event: {
-      headers: {},
+      headers,
       requestContext: {
         httpMethod,
         resourcePath

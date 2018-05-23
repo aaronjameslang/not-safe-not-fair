@@ -1,4 +1,4 @@
-exports['/nsnf/src/server/route/report.spec.js GET /report 1'] = {
+exports['report.spec.js GET /report 1'] = {
   "statusCode": 200,
   "headers": {
     "Content-Type": "application/json",
@@ -103,7 +103,7 @@ exports['/nsnf/src/server/route/report.spec.js GET /report 1'] = {
   ]
 }
 
-exports['/nsnf/src/server/route/report.spec.js POST /report 201 1'] = {
+exports['report.spec.js POST /report 201 1'] = {
   "statusCode": 201,
   "headers": {
     "Content-Type": "application/json",
@@ -118,7 +118,7 @@ exports['/nsnf/src/server/route/report.spec.js POST /report 201 1'] = {
   }
 }
 
-exports['/nsnf/src/server/route/report.spec.js POST /report 401 No token 1'] = {
+exports['report.spec.js POST /report 401 No token 1'] = {
   "statusCode": 401,
   "headers": {
     "Content-Type": "application/json",
@@ -131,7 +131,7 @@ exports['/nsnf/src/server/route/report.spec.js POST /report 401 No token 1'] = {
   "body": "No authorization"
 }
 
-exports['/nsnf/src/server/route/report.spec.js POST /report 401 Expired 1'] = {
+exports['report.spec.js POST /report 401 Expired 1'] = {
   "statusCode": 401,
   "headers": {
     "Content-Type": "application/json",
@@ -144,7 +144,7 @@ exports['/nsnf/src/server/route/report.spec.js POST /report 401 Expired 1'] = {
   "body": "jwt expired"
 }
 
-exports['/nsnf/src/server/route/report.spec.js POST /report 403 1'] = {
+exports['report.spec.js POST /report 403 1'] = {
   "statusCode": 403,
   "headers": {
     "Content-Type": "application/json",

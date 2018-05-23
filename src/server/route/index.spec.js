@@ -2,7 +2,7 @@ import assert from 'assert'
 import execute from '../../../test/execute'
 import { describe, it } from 'mocha'
 
-describe(__filename, () => {
+describe(__filename.split('/').pop(), () => {
   it('GET /', () =>
     execute('GET', '/').then(res => {
       assert.equal(res.statusCode, 200)

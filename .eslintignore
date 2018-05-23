@@ -1,3 +1,4 @@
-__snapshots__/**
+__snapshots__
 dist
-migrations/**/*.js
+migrations
+node_modules

@@ -16,3 +16,9 @@ export const select = () =>
      ORDER BY report.ctime DESC
      LIMIT 1000
   `)
+
+export const deleet = id =>
+  pool.query(`
+      DELETE FROM report
+       WHERE id = $1
+    `, [id])

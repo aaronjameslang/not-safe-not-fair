@@ -37,7 +37,7 @@ export const authenticate = ({ authorization }) => {
 
 export const authorise = emailAddress => {
   const isNhs = emailIsNhs(emailAddress)
-  if (isNhs) return
+  if (isNhs) return Promise.resolve()
   return user.existsWhereEmailAddressEquals(emailAddress)
     .then(exists => {
       if (exists) return

@@ -18,7 +18,7 @@ export default withStyles({
   <div className={'report ' + props.classes.column}>
     <div className={props.classes.row}>
       <Ago timestamp={props.ctime} />
-      <Location location={props.location_name} />
+      <Location location={props.locationName} />
     </div>
     <Reasons reasons={props.reasons} />
     <Comment comment={props.comment} />

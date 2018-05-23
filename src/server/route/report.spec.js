@@ -1,5 +1,7 @@
 import assert from 'assert'
 import execute from '../../../test/execute'
+import jwt from 'jsonwebtoken'
+import sinon from 'sinon'
 import snapshot from 'snap-shot-it'
 import { describe, it } from 'mocha'
 
@@ -21,7 +23,11 @@ describe(__filename, () => {
       assert.equal(r.statusCode, 401)
     }))
 
-  // it('POST /report 403', () =>
-  //   execute('POST', '/report').then(r =>
-  //     snapshot({ ...r, body: JSON.parse(r.body)})))
+  it('POST /report 403', () => {
+    sinon.stub(jwt, 'verify').returns({ email: 'rando@nhs.not' })
+    return execute('POST', '/report', {authorization: 'X'}).then(r => {
+      snapshot({...r, body: JSON.parse(r.body)})
+      assert.equal(r.statusCode, 403)
+    })
+  })
 })

@@ -114,7 +114,7 @@ exports['report.spec.js POST /report 201 1'] = {
     "Access-Control-Max-Age": "0"
   },
   "body": {
-    "id": "string"
+    "id": "[REDACTED:string:36]"
   }
 }
 

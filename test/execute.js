@@ -1,7 +1,8 @@
 import snapshot from 'snap-shot-it'
+import assert from 'assert'
 import { execute } from 'lambda-local'
 
-export default (httpMethod, resourcePath, headers = {}, body = undefined) =>
+export default (httpMethod, resourcePath, code = 200, headers = {}, body = undefined) =>
   execute({
     environment: {
       HTML_URL: 'dist/index.html'
@@ -20,6 +21,7 @@ export default (httpMethod, resourcePath, headers = {}, body = undefined) =>
   }).then(response => {
     response.body = JSON.parse(response.body)
     snapshot(sanitiseResponse(response))
+    assert.equal(response.statusCode, code)
     return response
   })
 

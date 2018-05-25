@@ -8,11 +8,6 @@ const schema = Joi.object().keys({
   comment: Joi.string().required()
 })
 
-const errorHandler = api => error => {
-  console.log(error)
-  return new api.ApiResponse(error.message, {}, error.httpStatusCode || 500)
-}
-
 export default api => {
   api.get('/report', report.select)
 
@@ -27,7 +22,6 @@ export default api => {
         return user.insert(id, emailAddress)
       })
       .then(() => report.insert({ ...body, userId }))
-      .catch(errorHandler(api))
   }, { success: { code: 201 } }
   )
 }

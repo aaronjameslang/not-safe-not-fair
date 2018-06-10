@@ -1,8 +1,8 @@
 import * as user from '../repo/user'
-import Error from '../Error'
 import emailIsNhs from '../../common/emailIsNhs'
 import jwt from 'jsonwebtoken'
 import uuidv5 from 'uuid/v5'
+import { ApiResponse } from '../api'
 
 const verify = token => {
   const key = require('../../../jwks').keys[0].pem
@@ -13,8 +13,7 @@ const verify = token => {
       {algorithms: ['RS256']}
     )
   } catch (error) {
-    error.httpStatusCode = 401
-    throw error
+    throw new ApiResponse(error.message, {}, 401)
   }
 }
 
@@ -25,7 +24,7 @@ const calcUserId = emailAddress =>
 
 export const authenticate = ({ authorization }) => {
   if (!authorization) {
-    throw new Error(401, 'No authorization')
+    throw new ApiResponse('No authorization', {}, 401)
   }
   const token = authorization.split(' ').pop()
   const verified = verify(token)
@@ -41,7 +40,7 @@ export const authorise = emailAddress => {
   return user.existsWhereEmailAddressEquals(emailAddress)
     .then(exists => {
       if (exists) return
-      throw new Error(403)
+      throw new ApiResponse('Forbidden', {}, 403)
     })
 }
 

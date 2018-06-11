@@ -14,7 +14,7 @@
     "pretest": "eslint --fix --ext .js,.jsx . || true",
     "start": "npm run start:db && npm run start:api & npm run webpack:dev",
     "start:api": "npx sam -- local start-api --docker-network=netsafenetfair --env-vars .env.json",
-    "start:db": "test -z $CI && docker-compose up -d",
+    "start:db": "test ! -z $CI || docker-compose up -d",
     "stats": "npm run stats:client & npm run stats:server",
     "stats:client": "webpack --mode=production --config webpack.config.client.js --profile --json > stats.client.json",
     "stats:server": "webpack --mode=production --config webpack.config.server.js --profile --json > stats.server.json",

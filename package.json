@@ -20,7 +20,7 @@
     "stats:server": "webpack --mode=production --config webpack.config.server.js --profile --json > stats.server.json",
     "stop": "npm run stop:db",
     "stop:db": "docker-compose down",
-    "test": "npm run start:db && npm run dbclean && mocha",
+    "test": "npm run start:db && sleep 10 && npm run dbclean && mocha",
     "webpack:dev": "webpack --mode=development --watch"
   },
   "author": "aaronjameslang@googlemail.com",

@@ -18,7 +18,7 @@ describe(__filename.split('/').pop(), () => {
       lambdaPath: 'src/server/index',
       timeoutMs: 30000
     }).then(res => {
-      assert.equal(res.statusCode, 200)
+      assert.equal(res.statusCode, 200, JSON.stringify(res, null, 2))
       assert.equal(res.headers['Content-Type'], 'text/html')
       assert(res.body)
       assert.equal(typeof res.body, 'string')

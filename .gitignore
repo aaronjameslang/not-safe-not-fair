@@ -1,4 +1,5 @@
 /.cache-loader
+/.env
 /configuration/*.csv
 /configuration/*.json
 /configuration/*.pdf

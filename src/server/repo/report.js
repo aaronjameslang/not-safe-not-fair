@@ -1,9 +1,10 @@
 import pool from './pool'
 
 export const insert = ({ userId, locationCode, comment }) =>
-  pool.query(`
+  pool.row(`
     INSERT INTO report (user_id, location_code, comment)
     VALUES ($1, $2, $3)
+ RETURNING id
   `, [ userId, locationCode, comment ])
 
 export const select = () =>
@@ -15,3 +16,9 @@ export const select = () =>
      ORDER BY report.ctime DESC
      LIMIT 1000
   `)
+
+export const deleet = id =>
+  pool.query(`
+      DELETE FROM report
+       WHERE id = $1
+    `, [id])

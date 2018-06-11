@@ -2,7 +2,7 @@ import assert from 'assert'
 import { describe, it } from 'mocha'
 import emailIsNhs from './emailIsNhs'
 
-describe(__filename, () => {
+describe(__filename.split('/').pop(), () => {
   const itShould = (expected, input) => {
     it(`should ${expected} ${input}`, () => {
       assert.equal(emailIsNhs(input), expected)

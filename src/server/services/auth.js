@@ -4,6 +4,20 @@ import emailIsNhs from '../../common/emailIsNhs'
 import jwt from 'jsonwebtoken'
 import uuidv5 from 'uuid/v5'
 
+const verify = token => {
+  const key = require('../../../jwks').keys[0].pem
+  try {
+    return jwt.verify(
+      token,
+      key,
+      {algorithms: ['RS256']}
+    )
+  } catch (error) {
+    error.httpStatusCode = 401
+    throw error
+  }
+}
+
 const NAMESPACE = 'F975FC06-AE71-4780-AF97-3CC393CA5C97'
 
 const calcUserId = emailAddress =>
@@ -11,15 +25,10 @@ const calcUserId = emailAddress =>
 
 export const authenticate = ({ authorization }) => {
   if (!authorization) {
-    throw new Error(401)
+    throw new Error(401, 'No authorization')
   }
   const token = authorization.split(' ').pop()
-  const key = require('../../../jwks').keys[0].pem
-  const verified = jwt.verify(
-    token,
-    key,
-    {algorithms: ['RS256']}
-  )
+  const verified = verify(token)
   return {
     emailAddress: verified.email,
     id: calcUserId(verified.email)
@@ -28,7 +37,7 @@ export const authenticate = ({ authorization }) => {
 
 export const authorise = emailAddress => {
   const isNhs = emailIsNhs(emailAddress)
-  if (isNhs) return
+  if (isNhs) return Promise.resolve()
   return user.existsWhereEmailAddressEquals(emailAddress)
     .then(exists => {
       if (exists) return
@@ -37,7 +46,11 @@ export const authorise = emailAddress => {
 }
 
 export default headers => {
-  const user = authenticate(headers)
-  return authorise(user.emailAddress)
-    .then(() => user)
+  try {
+    const user = authenticate(headers)
+    return authorise(user.emailAddress)
+      .then(() => user)
+  } catch (error) {
+    return Promise.reject(error)
+  }
 }

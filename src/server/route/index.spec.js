@@ -1,9 +1,8 @@
 import assert from 'assert'
-import { describe, it } from 'mocha'
 import { execute } from 'lambda-local'
-import snapshot from 'snap-shot-it'
+import { describe, it } from 'mocha'
 
-describe(__filename, () => {
+describe(__filename.split('/').pop(), () => {
   it('GET /', () =>
     execute({
       environment: {
@@ -24,18 +23,5 @@ describe(__filename, () => {
       assert(res.body)
       assert.equal(typeof res.body, 'string')
     })
-  )
-
-  it('GET /report', () =>
-    execute({
-      event: {
-        requestContext: {
-          httpMethod: 'GET',
-          resourcePath: '/report'
-        }
-      },
-      lambdaPath: 'src/server/index',
-      timeoutMs: 30000
-    }).then(r => snapshot({ ...r, body: JSON.parse(r.body) }))
   )
 })

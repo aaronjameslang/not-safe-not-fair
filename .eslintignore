@@ -2,3 +2,4 @@ __snapshots__
 dist
 migrations
 node_modules
+venv

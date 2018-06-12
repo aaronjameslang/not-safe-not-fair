@@ -9,10 +9,10 @@ Resources:
       Timeout: 10
       Environment:
         Variables:
-          HTML_URL: 'see ./.env.json'
-          PGHOST: 'see ./.env.json'
-          PGPASSWORD: 'see ./.env.json'
-          PGUSER: 'see ./.env.json'
+          HTML_URL: 'see .env'
+          PGHOST: 'see .env'
+          PGPASSWORD: 'see .env'
+          PGUSER: 'see .env'
       Events:
         Api:
           Type: Api

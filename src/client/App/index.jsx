@@ -1,8 +1,8 @@
-import CssBaseline from 'material-ui/CssBaseline'
+import CssBaseline from '@material-ui/core/CssBaseline'
 import HashRouter from 'react-router-dom/HashRouter'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import React from 'react'
-import withStyles from 'material-ui/styles/withStyles'
+import withStyles from '@material-ui/core/styles/withStyles'
 
 import Footer from './Footer'
 import Header from './Header'

@@ -1,5 +1,5 @@
-import BottomNavigation from 'material-ui/BottomNavigation'
-import BottomNavigationAction from 'material-ui/BottomNavigation/BottomNavigationAction'
+import BottomNavigation from '@material-ui/core/BottomNavigation'
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import IconFindInPage from '@material-ui/icons/FindInPage'
 import IconNoteAdd from '@material-ui/icons/NoteAdd'
 import React from 'react'

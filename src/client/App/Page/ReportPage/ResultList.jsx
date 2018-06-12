@@ -1,7 +1,7 @@
 import React from 'react'
-import T from 'material-ui/Typography'
+import T from '@material-ui/core/Typography'
 import classnames from 'classnames'
-import withStyles from 'material-ui/styles/withStyles'
+import withStyles from '@material-ui/core/styles/withStyles'
 
 export default ({results, Result}) => (
   <div>

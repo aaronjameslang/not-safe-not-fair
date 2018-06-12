@@ -1,5 +1,5 @@
-import Button from 'material-ui/Button'
-import CircularProgress from 'material-ui/Progress/CircularProgress'
+import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import MyLocationIcon from '@material-ui/icons/MyLocation'
 import React from 'react'
 

@@ -1,10 +1,10 @@
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import ClearIcon from '@material-ui/icons/Clear'
-import MenuItem from 'material-ui/Menu/MenuItem'
+import MenuItem from '@material-ui/core/MenuItem'
 import React from 'react'
-import Typography from 'material-ui/Typography'
-import withStyles from 'material-ui/styles/withStyles'
+import Typography from '@material-ui/core/Typography'
+import withStyles from '@material-ui/core/styles/withStyles'
 import { Async } from 'react-select'
 
 class Option extends React.Component {

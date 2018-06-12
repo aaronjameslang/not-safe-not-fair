@@ -1,6 +1,6 @@
 import Link from 'react-router-dom/Link'
 import React from 'react'
-import withStyles from 'material-ui/styles/withStyles'
+import withStyles from '@material-ui/core/styles/withStyles'
 
 export default withStyles({
   root: {

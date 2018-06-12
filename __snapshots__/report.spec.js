@@ -128,7 +128,9 @@ exports['report.spec.js POST /report 401 No token 1'] = {
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Max-Age": "0"
   },
-  "body": "No authorization"
+  "body": {
+    "errorMessage": "No authorization"
+  }
 }
 
 exports['report.spec.js POST /report 401 Expired 1'] = {
@@ -141,7 +143,9 @@ exports['report.spec.js POST /report 401 Expired 1'] = {
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Max-Age": "0"
   },
-  "body": "jwt expired"
+  "body": {
+    "errorMessage": "jwt expired"
+  }
 }
 
 exports['report.spec.js POST /report 403 1'] = {
@@ -154,5 +158,7 @@ exports['report.spec.js POST /report 403 1'] = {
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Max-Age": "0"
   },
-  "body": {}
+  "body": {
+    "errorMessage": "Forbidden"
+  }
 }

@@ -24,7 +24,9 @@ exports['user.spec.js GET /user 401 1'] = {
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Max-Age": "0"
   },
-  "body": "jwt expired"
+  "body": {
+    "errorMessage": "jwt expired"
+  }
 }
 
 exports['user.spec.js GET /user 403 1'] = {
@@ -37,5 +39,7 @@ exports['user.spec.js GET /user 403 1'] = {
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Max-Age": "0"
   },
-  "body": {}
+  "body": {
+    "errorMessage": "Forbidden"
+  }
 }

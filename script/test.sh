@@ -9,7 +9,7 @@ echo TODO > dist/index.html
 fi
 
 eslint --ext .js,.jsx . --fix || true
-mocha
+mocha --exit
 eslint --ext .js,.jsx .
 git diff --exit-code --text
 webpack --mode=production

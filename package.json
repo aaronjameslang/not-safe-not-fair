@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "docker": "docker run -it --rm --network=netsafenetfair --env-file .env --mount type=bind,src=$PWD,dst=/nsnf -w /nsnf",
+    "postinstall": "script/postinstall.sh",
     "test": "script/test.sh",
     "stop": "script/stop.sh",
     "start": "script/start.sh",

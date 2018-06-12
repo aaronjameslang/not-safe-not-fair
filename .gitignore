@@ -10,3 +10,4 @@
 /migrations/log
 /node_modules
 /stats.*.json
+/venv

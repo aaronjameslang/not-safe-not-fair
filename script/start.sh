@@ -7,7 +7,7 @@ export $(cat .env | xargs)
 export PGHOST=db
 export PGPORT=5432
 set +u
-source venv/bin/activate
+. venv/bin/activate
 set -u
 sam local start-api --docker-network=netsafenetfair &
 webpack --mode=development --watch &

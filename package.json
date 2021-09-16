@@ -31,7 +31,7 @@
     "db-migrate": "^0.11.1",
     "db-migrate-pg": "^0.4.0",
     "dotenv": "^6.0.0",
-    "eslint": "^4.19.1",
+    "eslint": "^7.0.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
     "eslint-plugin-import": "^2.12.0",
@@ -58,6 +58,6 @@
     "uuid": "^3.2.1",
     "webpack": "^4.12.0",
     "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-cli": "^3.0.3"
+    "webpack-cli": "^4.0.0"
   }
 }

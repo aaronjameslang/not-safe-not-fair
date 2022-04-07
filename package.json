@@ -45,7 +45,7 @@
     "joi": "^13.4.0",
     "jsonwebtoken": "^8.3.0",
     "jwk-to-pem": "^2.0.0",
-    "lambda-local": "^1.5.1",
+    "lambda-local": "^1.6.1",
     "mocha": "^5.2.0",
     "pg": "^7.4.3",
     "ramda": "^0.25.0",
